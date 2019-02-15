@@ -1,20 +1,58 @@
-### TypeScript mini course
-Mini course in TypeScript
+## TypeScript 101
+Getting started with TypeScript for Javascript developers.
 
-1. What is TypeScript
-    - ...
+### Structure
 
+#### What is TypeScript
+...
 
-2. Why would you use it
-    - ...
+#### Why would you use it
+...
 
+#### Where do you use it for
+...
 
-3. Where do you use it for
-    - ...
+* All examples are in React
 
-* Type annotations
+* Basic types
+  - String
+  - Number
+  - Boolean
+  - Array
+  - Tuple
+  - Enum // enum Range {1, 2, 3}
+  - Any
+  - Void
+  - Null / Undefined
+  - Never
+  - Object
+
 * Interfaces
+  - Readonly
+  - Function types
+  - Indexable types
+  - Class types
 
+* Classes
+  - Inheritance (implements, extends)
+  - Public, Private, Protected
+  - Readonly
+  - Getters / Setters
+  - Static
+  - Abstract
+
+* Functions
+  - Function types
+  - Optional / default parameters
+  - Rest parameters
+  - This & Arrow functions
+  - Overloads
+
+* Generics
+  - Generic types
+  - Generic classes
+  - Generic constraints
 
 Resources
     - [TypeScript docs](https://www.typescriptlang.org/docs/home.html)
+    - [TypeScript playground](https://www.typescriptlang.org/play/index.html)
