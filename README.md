@@ -655,6 +655,10 @@ function multiplyAge(person: Person) {
 
 #### The compiler
 ...
+What does it do?
+How does it work?
+What will the result be like?
+async-await transformation
 
 -- refer to playground and show compiled JS result
 
@@ -670,6 +674,17 @@ Resources
 * [Interfaces vs Type Aliases](https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c)
 
 
+
+#### Exercises
+
+- Make example package.json (ts-node + typescript + tsconfig.json)
+- Setup compiler
+- Visual Studio Code / WebStorm TypeScript plugin
+
+- Refactor exercises
+- 
+
+- Use StackBlitz?
 
 
 #### Advanced topics (WIP)
