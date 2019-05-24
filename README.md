@@ -63,21 +63,39 @@ function multiplyAge(person: Person) {
 
 #### The language
 * Basic types
+
   - String
     ```ts
     const myName: string = 'Martin'
     const myLastName: string = 123 // Error! Type '123' is not assignable to type 'string'.
     ```
+
+  - String Literal
+    ```ts
+    let myType: 'A' | 'B' = 'A'
+    myType = 'B' // Works!
+    myType = 'Z' // Error! Type '"Z"' is not assignable to type '"A" | "B"'.
+    ```
+
   - Number
     ```ts
     const myAge: number = 28
     const daysLeftThisYear: number = '100' // Error! Type '"100"' is not assignable to type 'number'.
     ```
+
+  - Number Literal
+    ```ts
+    let myType: 1 | 2 = 1
+    myType = 2 // Works!
+    myType = 9 // Error! Type '9' is not assignable to type '1 | 2'.
+    ```
+
   - Boolean
     ```ts
     const hasChildren: boolean = true
     const amountOfChildren: boolean = 22 // Error! Type '22' is not assignable to type 'boolean'.
     ```
+
   - Array
     ```ts
     const days: string[] = [ 'Monday', 'Tuesday', 'Wednesday' ]
@@ -86,11 +104,13 @@ function multiplyAge(person: Person) {
     const dates: number[] = [ 1, 2, '3' ] // Error! Type 'string' is not assignable to type 'number'.
     const dates2: Array<string | number> = [ 1, 2, '3' ] // Works!
     ```
+
   - Tuple
     ```ts
     const tuple: [ string, number ] = [ 'age', 28 ]
     const otherTuple: [ string, string ] = [ 'a', 'b', 'c' ] // Error! Types of property 'length' are incompatible. Type '3' is not assignable to type '2'.
     ```
+
   - Enum
     ```ts
     enum ResponseCode {
@@ -106,6 +126,7 @@ function multiplyAge(person: Person) {
         return ResponseCode.NOT_FOUND
     }
     ```
+
   - Any
     
     Avoid where possible! Removes your typesafety!
@@ -114,6 +135,7 @@ function multiplyAge(person: Person) {
     const yourAge: string = myAge // Error! Type 'number' is not assignable to type 'string'.
     const yourAge: any = myAge // Works!
     ```
+
   - Void
     ```ts
     function getNumber(): number {
@@ -128,11 +150,13 @@ function multiplyAge(person: Person) {
         return 'abc' // Error! Type '"abc"' is not assignable to type 'void'.
     }
     ```
+
   - Null / Undefined
     ```ts
         const u: undefined = undefined;
         const n: null = null;
     ```
+
   - Never
     
     Should -never- happen
@@ -153,13 +177,14 @@ function multiplyAge(person: Person) {
         }
     }
     ```
+
   - Object
     ```ts
     const myObject: object = { name: 'Henk' }
     const notAnObject: object = 1 // Error! Type '1' is not assignable to type 'object'.
     ```
   - Record
-    
+
     Looks like an object but is more limited.
     ```ts
     const myRecord: Record<string, number> = { age: 22 }
@@ -175,6 +200,7 @@ function multiplyAge(person: Person) {
         age: number
     }
     ```
+
   - Readonly
     ```ts
     interface Person {
@@ -184,6 +210,14 @@ function multiplyAge(person: Person) {
 
     const person: Person = { name: 'Henk', age: 22 }
     person.name = 'Piet' // Error! Cannot assign to 'name' because it is a read-only property.
+    ```
+
+  - Optionals
+    ```ts
+    interface Person {
+      name: string
+      age?: number // this is optional
+    }
     ```
 
   - Extending
@@ -532,15 +566,92 @@ function multiplyAge(person: Person) {
 
 * Functions
   - Function types
-  - Optional / default parameters
-  - Rest parameters
-  - This & Arrow functions
-  - Overloads
 
-* Generics
-  - Generic types
-  - Generic classes
-  - Generic constraints
+    Without types:
+
+    ```js
+    const minutesToSeconds = (minutes) => {
+      return minutes * 60
+    }
+    ```
+
+    With parameter- and return type:
+
+    ```ts
+    const minutesToSeconds = (minutes: number): number => {
+      return minutes * 60
+    }
+    ```
+
+    With Function Type:
+
+    ```ts
+    type MinutesToSeconds = (minutes: number) => number
+
+    const minutesToSeconds: MinutesToSeconds = (minutes: number): number => {
+      return minutes * 60
+    }
+    ```
+
+    Or we can just use the Function Type:
+
+    ```ts
+    type MinutesToSeconds = (minutes: number) => number
+
+    const minutesToSeconds: MinutesToSeconds = (minutes) => {
+      return minutes * 60
+    }
+    ```
+
+  - Optional / default parameters
+
+    Optional parameters:
+    ```ts
+    const multiply = (a: number, b?: number) {
+      return a * b // Error! Object is possibly 'undefined'.
+    }
+    ```
+
+    ```ts
+    const multiply = (a: number, b?: number) {
+      if (b === undefined) {
+        return 0
+      }
+
+      return a * b // Works!
+    }
+    ```
+
+    Default parameter:
+
+    ```ts
+    const multiply = (a: number, b: number = 0) {
+      return a * b // Works!
+    }
+    ```
+
+    Note: when declaring parameters with default values, they will be optional as well:
+
+    ```ts
+    const multiply = (a: number, b: number = 0) {
+      return a * b // Works!
+    }
+
+    multiply(2) // Works!
+    multiply(2, 3) // Also works!
+    ```
+
+  - Rest parameters
+    ```ts
+    const logColors = (firstColor: string, ...otherColors: string[]) => {
+      console.log(`The first color is: ${firstColor}`)
+      console.log(`The other colors are: ${otherColors.join(', ')}`)
+    }
+
+    logColors('white', 'blue', 'red')
+    // 'The first color is: white'
+    // 'The other colors are: blue, red'
+    ```
 
 #### The compiler
 ...
@@ -557,3 +668,59 @@ Resources
 * [TypeScript docs](https://www.typescriptlang.org/docs/home.html)
 * [TypeScript playground](https://www.typescriptlang.org/play/index.html)
 * [Interfaces vs Type Aliases](https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c)
+
+
+
+
+#### Advanced topics (WIP)
+* String Literal Types ( const TYPE = 'type' const test: typeof TYPE)
+* Overloads
+* Generic types -> <T>
+* Union types -> string | number
+
+    & even more advanced: (Discriminated Unions)
+    ```st
+    type Cat = {
+      type: 'cat'
+      name: string
+      miouw: () => void
+    }
+
+    type Dog = {
+      type: 'dog'
+      name: string
+      woof: () => void
+    }
+
+    type animal = Cat | Dog
+
+    switch(animal.type) {
+      case 'cat':
+        // we have miouw here
+      case 'dog':
+        // we have woof here
+    }
+    ```
+* Intersection types -> A & B
+* Nullables -> string | null
+* Exhaustiveness checking
+
+  ```ts
+  type = 'a' | 'b'
+
+  switch(type)
+    case a
+    case b
+    default
+      -> exhaustive checks
+  ```
+
+* branded types
+
+  ```ts
+  type BrandedString = string & { brand: 'test' }
+  ```
+
+* Omit
+* Pick
+* 
