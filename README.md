@@ -14,6 +14,14 @@ Getting started with TypeScript for Javascript developers.
 * Scalability
 * Stricter programming
 * Less chance to write errors and bugs
+* Easier to refactor
+
+#### Support & Usages
+* Angular
+* Libraries (such as RxJS)
+* Babel, ESLint
+* Great support for other frameworks as well (React, Vue)
+* `ts-node` for running directly in Node
 
 #### Example JS (1)
 ```js
@@ -168,30 +176,359 @@ function multiplyAge(person: Person) {
     }
     ```
   - Readonly
+    ```ts
+    interface Person {
+        readonly name: string
+        age: number
+    }
+
+    const person: Person = { name: 'Henk', age: 22 }
+    person.name = 'Piet' // Error! Cannot assign to 'name' because it is a read-only property.
+    ```
+
+  - Extending
+    ```ts
+    interface Person {
+      name: string
+      age: number
+    }
+
+    interface ExtendedPerson extends Person {
+      birthDate: Date
+      gender: 'male' | 'female'
+    }
+    ```
+
+  - Overriding
+    ```ts
+    interface File {
+      name: string
+      icon: string
+    }
+
+    interface WordDocument extends File {
+      icon: 'word'
+    }
+    ```
+    
   - Function types
+    ```ts
+    type NumberFunction = (input: number) => number
+
+    const generateNumber: NumberFunction = (input) => {
+        return input + 1
+    }
+    ```
+
+    With function types; type declarations of arguments and return types are not required as shown above.
+
   - Indexable types
+    ```ts
+    interface Mapping {
+      [index: string]: string
+    }
+    ```
+
   - Class types
-  
+    ```ts
+    interface IPerson {
+      name: string
+      age: number
+    }
+
+    class Person implements IPerson {
+      public name: 'Henk'
+      public age: 22
+    }
+    ```
   - Type aliases
     
     Almost the same as `interface` but;
     * Is not extendable
-    * 
+    * Is not overridable
+    * Different syntax
     ```ts
     type Person = {
         name: string
         age: number
     }
     ```
-  - Arrays -> Type[] Interface[]
+  - Arrays
+    ```ts
+    type Person = {
+      name: string
+    }
+
+    const persons: Person[] = [{ name: 'Henk' }, { name: 'Marie' }]
+
+    interface IPerson {
+      name: string
+    }
+
+    const persons: IPerson[] = [{ name: 'Henk' }, { name: 'Marie' }]
+
+    type Persons = Person[]
+    const persons: Persons = [ ... ]
+    ```
 
 * Classes
-  - Inheritance (implements, extends)
-  - Public, Private, Protected
+  - Basics
+    ```ts
+    class DroneController {
+      isActive: boolean
+
+      constructor(isActive: boolean) {
+        this.isActive = isActive
+      }
+
+      getIsActive(): boolean {
+        return this.isActive
+      }
+    }
+
+    const drone = new DroneController(true)
+    ```
+
+  - Inheritance (implements)
+    ```ts
+    interface IDroneController {
+      isActive: boolean
+    }
+
+    class DroneController implements IDroneController {
+      ...
+    }
+    ```
+
+  - Inheritance (extends)
+    ```ts
+    class Controller {
+      isActive: boolean
+
+      constructor(isActive: boolean) {
+        this.isActive = isActive
+      }
+
+      getIsActive(): boolean {
+        return this.isActive
+      }
+    }
+
+    class DroneController extends Controller {
+      altitude: number
+
+      constructor(isActive: boolean, altitude: number) {
+        super(isActive)
+        this.altitude = altitude
+      }
+
+      getState() {
+        return {
+          isActive: super.getIsActive(),
+          altitude: this.altitude
+        }
+      }
+    }
+
+    const drone = new DroneController(true, 0)
+    ```
+
+  - Public
+    ```ts
+    class DroneController {
+      public isActive: boolean
+
+      constructor(isActive: boolean) {
+        this.isActive = isActive
+      }
+    }
+
+    new DroneController(false).isActive // Works!
+    ```
+
+  - Private
+    ```ts
+    class DroneController {
+      private isActive: boolean
+
+      constructor(isActive: boolean) {
+        this.isActive = isActive
+      }
+
+      // this will only work within the class
+      private getIsActive(): boolean {
+        return this.isActive
+      }
+
+      // because this is a public method we can use it from the outside
+      public getIsActiveAsPublic(): boolean {
+        return this.isActive
+      }
+    }
+
+    const controller = new DroneController(false)
+
+    controller.isActive // Error! Property 'isActive' is private and only accessible within class 'DroneController'.
+
+    controller.getIsActive() // Error! Property 'getIsActive' is private and only accessible within class 'DroneController'.
+
+    controller.getIsActiveAsPublic() // Works!
+    ```
+  - Protected
+    ```ts
+    class Controller {
+      protected isActive: boolean
+
+      constructor(isActive: boolean) {
+        this.isActive = isActive
+      }
+    }
+
+    class DroneController extends Controller {
+      public altitude: number
+
+      constructor(isActive: boolean, altitude: number) {
+        super(isActive)
+        this.altitude = altitude
+      }
+
+      getState() {
+        return {
+          // we can access the protected isActive here because this class derives from Controller
+          isActive: this.isActive,
+          altitude: this.altitude
+        }
+      }
+    }
+
+    const controller = new DroneController(false, 1)
+    
+    controller.altitude // Works! Because it's a public property
+
+    controller.isActive // Error! Property 'isActive' is protected and only accessible within class 'Controller' and its subclasses.
+    ```
   - Readonly
+    ```ts
+    class Controller {
+      readonly isActive: boolean
+
+      constructor(isActive: boolean) {
+        // we can only assign readonlys in the constructor
+        this.isActive = isActive
+      }
+
+      someFunction() {
+        this.isActive = false // Error! Cannot assign to 'isActive' because it is a read-only property.
+      }
+    }
+
+    const controller = new Controller(true)
+    controller.isActive = // Error! Cannot assign to 'isActive' because it is a read-only 
+    ```
+
   - Getters / Setters
+    ```ts
+    // Meh
+    class Controller {
+      isActive: boolean
+    }
+
+    const controller = new Controller()
+    controller.isActive = true
+
+    const controllerState = controller.isActive // true
+    ```
+
+    ```ts
+    // Yeah!
+    class Controller {
+      private _isActive: boolean
+
+      get isActive(): boolean {
+        return this._isActive
+      }
+
+      set isActive(isActive: boolean) {
+        this._isActive = isActive
+      }
+    }
+
+    const controller = new Controller()
+    controller.isActive = false
+
+    const controllerState = controller.isActive // false
+    ```
+
+    Getters and Setters gives us more control about getting and setting the state.
+
   - Static
+    ```ts
+    class Controller {
+      static type: string = 'drone'
+
+      static blieb() {
+        // make some noise
+      }
+    }
+
+    const controllerType = Controller.type // 'drone'
+    
+    Controller.blieb() // makes noise!
+    ```
+
+    Static properties or methods are available without constructing the class.
+
   - Abstract
+    ```ts
+    abstract class Controller {
+      private isActive: boolean
+
+      constructor(isActive: boolean) {
+        this.isActive = isActive
+      }
+
+      protected abstract blieb(): void // must be implemented in derived classes
+    }
+
+    class DroneController extends Controller {
+      constructor(isActive: boolean) {
+        super(isActive)
+      }
+
+      protected blieb() {
+        MOTORS.zoom()
+      }
+    }
+    ```
+
+  - Shorthands for private and public
+    ```ts
+    class Controller {
+      private isActive: boolean
+      public type: string
+
+      constructor(isActive: boolean, type: string) {
+        this.isActive = isActive
+        this.type = type
+      }
+    }
+
+    const controller = new Controller(true, 'drone')
+    controller.type // 'drone'
+    ```
+
+    Shorter version could be as follows;
+
+    ```ts
+    class Controller {
+      constructor(private isActive: boolean, public type: string) {}
+    }
+
+    const controller = new Controller(true, 'drone')
+    controller.type // 'drone'
+    ```
+
+    When declaring the parameters of the contructor `private` or `public` they will we set automatically.
 
 * Functions
   - Function types
@@ -207,6 +544,8 @@ function multiplyAge(person: Person) {
 
 #### The compiler
 ...
+
+-- refer to playground and show compiled JS result
 
 * tsconfig.json
   - Lib
