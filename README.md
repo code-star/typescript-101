@@ -1,29 +1,29 @@
 ## TypeScript 101
 Getting started with TypeScript for Javascript developers.
 
-### Structure
+## Overview
 
-#### What is TypeScript
+### What is TypeScript
 * Superset of Javascript
     * Adds types to Javascript
     * ESNext features
 * Open source; created and maintained by Microsoft
 
 
-#### Why would you use it
+### Why would you use it
 * Scalability
 * Stricter programming
 * Less chance to write errors and bugs
 * Easier to refactor
 
-#### Support & Usages
+### Support & Usages
 * Angular
 * Libraries (such as RxJS)
 * Babel, ESLint
 * Great support for other frameworks as well (React, Vue)
 * `ts-node` for running directly in Node
 
-#### Example JS (1)
+### Example JS (1)
 ```js
 const person = { name: 'Henk', age: 22 }
 
@@ -34,7 +34,7 @@ function multiplyAge(person) {
 multiplyAge(person) // what would be the result?
 ```
 
-#### Example JS (2)
+### Example JS (2)
 ```js
 const person = { name: 'Piet' }
 
@@ -45,7 +45,7 @@ function multiplyAge(person) {
 multiplyAge(person) // what would be the result?
 ```
 
-#### Example TS
+### Example TS
 ```ts
 type Person = {
     name: string
@@ -61,7 +61,8 @@ function multiplyAge(person: Person) {
 }
 ```
 
-#### The language
+## The language
+
 * Basic types
 
   - String
@@ -653,41 +654,172 @@ function multiplyAge(person: Person) {
     // 'The other colors are: blue, red'
     ```
 
-#### The compiler
-...
-What does it do?
-How does it work?
-What will the result be like?
-async-await transformation
+## The compiler
 
--- refer to playground and show compiled JS result
+### What does it do?
+* Transforms (compiles) TypeScript to Javascript
+* Checks your code for type errors
+* Bundles your code (optional)
+* Generates source maps
+* Transpiles code to lower JS versions (e.g.: ES3)
 
-* tsconfig.json
-  - Lib
-  - Strict
-  - OutFile & Triple-slash references
-  - 
+### How does it work?
+* Configuration file (`tsconfig.json`)
+* `tsc` command
+* Integration with module bundlers (Webpack, Parcel, Grunt, Gulp, ...)
 
-Resources
-* [TypeScript docs](https://www.typescriptlang.org/docs/home.html)
-* [TypeScript playground](https://www.typescriptlang.org/play/index.html)
-* [Interfaces vs Type Aliases](https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c)
+### What will the result be like?
 
+Given a simple Class:
+```ts
+class Person {
+    constructor(private name: string, private age: number) { }
+    public sayHello() {
+        alert(`Hello, ${this.name}!`)
+    }
+}
 
+const john = new Person('John', 22)
+john.sayHello()
+```
 
-#### Exercises
+Compiles to:
 
-- Make example package.json (ts-node + typescript + tsconfig.json)
-- Setup compiler
-- Visual Studio Code / WebStorm TypeScript plugin
+```js
+var Person = /** @class */ (function () {
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.sayHello = function () {
+        alert("Hello, " + this.name + "!");
+    };
+    return Person;
+}());
+var john = new Person('John', 22);
+john.sayHello();
+```
 
-- Refactor exercises
-- 
+* It compiles back to Javascript
+* It converts a `class` to `function`
+* It removes the type annotations
 
-- Use StackBlitz?
+### What will the result be like? (2)
 
+Given a slightly more advanced piece of TypeScript:
 
-#### Advanced topics (WIP)
+```ts
+function sayHelloAfter5Seconds(): Promise<string> {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve('Hello!')
+        }, 5000)
+    })
+}
+
+async function myApp() {
+    const hello = await sayHelloAfter5Seconds()
+    console.log('Hello')
+}
+```
+
+It adds a lot of code this time!
+
+```js
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    ...
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    ...
+};
+function sayHelloAfter5Seconds() {
+    return new Promise(function (resolve) {
+        setTimeout(function () {
+            resolve('Hello!');
+        }, 5000);
+    });
+}
+function myApp() {
+    return __awaiter(this, void 0, void 0, function () {
+        var hello;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, sayHelloAfter5Seconds()];
+                case 1:
+                    hello = _a.sent();
+                    console.log('Hello');
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+
+```
+
+* It transpiles `async/await` back to Javascript as a sort-of polyfill
+* It converts arrow functions (`() => ...`) back to `function`
+
+### Compiler options
+* Configuration lives in `tsconfig.json`
+* `allowJs` -> Allow JavaScript files to be compiled.
+* `checkJs` -> Report errors in `.js` files. 
+* `lib` -> Select the JS version you are going to write, i.e.: `ES6` so it adds type information for these new language features.
+* `noEmit` -> Create `.js` from `.ts` files for your project.
+* `strict` -> Strict types (`strictNullChecks`).
+* `watch` -> Recompile on source changes.
+* `outFile` -> Bundle all TS code into one file.
+
+### Usage with libraries
+* External type definitions
+* `npm install react @types/react`
+* Provides type information of the exported library components / functions
+* Maintained on DefinitelyTyped (https://github.com/DefinitelyTyped/DefinitelyTyped)
+
+### Getting started
+* `npm init -y`
+* `npm install typescript ts-node`
+* `touch index.ts`
+  ```ts
+  const text: string = 'Hello from TypeScript!'
+  console.log(text)
+  ```
+
+* `touch tsconfig.json`
+  ```json
+  {
+      "compilerOptions": {
+          "module": "commonjs",
+          "noImplicitAny": true,
+          "removeComments": true,
+          "preserveConstEnums": true,
+          "sourceMap": true,
+          "strict": true
+      }
+  }
+  ```
+#### Run the code by execute in Terminal:
+```bash
+npx ts-node ./index.ts
+```
+
+#### Compile the code by executing in your Terminal:
+```bash
+npx tsc
+```
+
+And notice that we now have a `.js` and a `.js.map` file in our directory!
+
+#### !! BUT !!
+Today we're going to use StackBlitz to write some TypeScript code!
+
+### Exercises
+
+1. https://stackblitz.com/edit/ts101-exercise-1
+2. ...
+
+---
+
+### Advanced topics (WIP)
 * String Literal Types ( const TYPE = 'type' const test: typeof TYPE)
 * Overloads
 * Generic types -> <T>
@@ -739,3 +871,15 @@ Resources
 * Omit
 * Pick
 * 
+
+
+
+
+
+
+
+
+## Resources
+* [TypeScript docs](https://www.typescriptlang.org/docs/home.html)
+* [TypeScript playground](https://www.typescriptlang.org/play/index.html)
+* [Interfaces vs Type Aliases](https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c)
