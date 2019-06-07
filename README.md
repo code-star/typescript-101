@@ -6,7 +6,7 @@ Getting started with TypeScript for Javascript developers.
 ### What is TypeScript
 * Superset of Javascript
     * Adds types to Javascript
-    * ESNext features
+    * ESNext features (but only when in ECMAScript specification)
 * Open source; created and maintained by Microsoft
 
 
