@@ -296,12 +296,14 @@ acceptTextFile('bla.jpg', 'jpg') // Error!
 ----
 
 - Boolean
+
 ```ts
 const hasChildren: boolean = true
 const amountOfChildren: boolean = 22 // Error! Type '22' is not assignable to type 'boolean'.
 ```
 
 - Null / Undefined
+  
 ```ts
 const u: undefined = undefined;
 const n: null = null;
@@ -310,6 +312,7 @@ const n: null = null;
 - Any
 
 Avoid where possible! Removes your typesafety!
+
 ```ts
 const myAge: number = 28
 const yourAge: string = myAge // Error! Type 'number' is not assignable to type 'string'.
@@ -319,6 +322,7 @@ co    nst yourAge: any = myAge // Works!
 ----
 
 - Array
+  
 ```ts
 const days: string[] = [ 'Monday', 'Tuesday', 'Wednesday' ]
 const years: number[] = [ 2018, 2019, 2020 ]
@@ -328,6 +332,7 @@ const dates2: Array<string | number> = [ 1, 2, '3' ] // Works!
 ```
 
 - Tuple
+
 ```ts
 const tuple: [ string, number ] = [ 'age', 28 ]
 const otherTuple: [ string, string ] = [ 'a', 'b', 'c' ] // Error! Types of property 'length' are incompatible. Type '3' is not assignable to type '2'.
@@ -336,6 +341,7 @@ const otherTuple: [ string, string ] = [ 'a', 'b', 'c' ] // Error! Types of prop
 ----
 
 - Enum
+
 ```ts
 enum ResponseCode {
 OK = 200,
@@ -354,13 +360,16 @@ return ResponseCode.NOT_FOUND
 ----
 
 - Object
+
 ```ts
 const myObject: object = { name: 'Henk' }
 const notAnObject: object = 1 // Error! Type '1' is not assignable to type 'object'.
 ```
+
 - Record
 
 Looks like an object but is more limited.
+
 ```ts
 const myRecord: Record<string, number> = { age: 22 }
 const myOtherRecord: Record<string, number[]> = { ages: [ 22, 65 ] }
@@ -391,8 +400,9 @@ The compiler will let you know when you forgot adding a `case` for an expected v
 ---
 
 ### Exercises basic types
-** Given a JS file, convert it to typescript (as typesafe as you can!)
-https://www.typescriptlang.org/play/?target=1#code/MYewdgzgLgBMCu0QFsCmAnCMC8MDaA3gFAykxgCGaAXDAOQBSFYdANCWQDYXQByVqWnQDSIAA4Y2HUqGRjmATyGjxAC2YATVJxgAhAHQA1fVLIwKGjelQQItYmbPAAllCX0AqlGvBVUU46k0NaoUEJePn4QNt4UFLAATAGBAF7OYgDCIFpCAIwJAMwALDAAgrp00jAAvuxm6CCcgvQZqs6oAGZ68ArOYADmMADyHR3OwJJ1ZBT9zUUAbES1MA5klDT0ABKoYADWyTDcfALKIOLIzAey8mDuImdi6mBaOgbGBxZWNnYrVU6udwiqF8-imgWCqFC4W8wKiMXQcUSBzMaUy2WadHyxTKFSqtSqDSaQla7S6AGUKE0sCMxhN0JVqgBdIhEPpQDAdCgTGAZRBQFAYX5mdbNYJ9fpVI5QfgbMUDKrXRS0OUSsyfay2WilSwaiAExqi7ziqozVAAfloYHgyAARhgliy3BIyjrvjghWQXG5lUaBmCYBCoQHff1-aisjlg+hjdUWR14GBgFBnOAYLMoNqvrYABQIJBodC0Xn5jAASg9pGsUHg6DAcD5AvQ+nV3wdRHjieTqfTpVmuYbBaLA7LFZgVZrdbz-ILzdmbdAkAN+k4IH62Z7fanjYgeFyjNLpaIC4gS5Xa57rpzW4LO4ADPvS0A
+Copy `exercises/1_js_toTypescript.js` and turn it into a Typescript file. 
+
+Make it as typesafe as you can!
 
 ---
 
