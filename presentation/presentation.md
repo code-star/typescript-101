@@ -115,30 +115,112 @@ This is there to help you!
 
 ---
 
-Beginnen met TypeScript (install typescript etc.)
+## ⚠️ Participation alert ⚠️
 
+### Please join us from here on out!
+
+---
+
+Let's install TypeScript!
+
+```sh
+# npm
+npm install typescript
+
+# yarn
+yarn add typescript
+```
+
+```sh
+mkdir typescript-101
+cd typescript-101
 tsc --init
-Eerste opdracht met tsc, in node / browser wat je wil. 
-(evt. ts-node nogmaals noemen?)
+```
 
-Uitstapje naar de tsconfig.json, met compiler opties
+----
 
-Uitstapje naar geleverde types. HTMLElement of fs
+### tsc --init
+- Creates a `tsconfig.json`
+- Sets up the default configuration for your TypeScript project
 
-opdracht?!
+----
+
+```ts
+{
+  "compilerOptions": {
+    /* Basic Options */
+    "target": "es5",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019' or 'ESNEXT'. */
+    "module": "commonjs",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
+    // "lib": ["dom"],                             /* Specify library files to be included in the compilation. */
+    // "declaration": true,                   /* Generates corresponding '.d.ts' file. */
+    // "declarationMap": true,                /* Generates a sourcemap for each corresponding '.d.ts' file. */
+    // "sourceMap": true,                     /* Generates corresponding '.map' file. */
+    // "outFile": "./",                       /* Concatenate and emit output to single file. */
+    // "outDir": "./",                        /* Redirect output structure to the directory. */
+    // "rootDir": "./",                       /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
+    /* Strict Type-Checking Options */
+    "strict": true,                           /* Enable all strict type-checking options. */
+  }
+}
+
+```
+
+----
+
+### Writing your first TypeScript
+
+```sh
+touch index.ts 
+code .        # for VSCode users
+```
+
+```ts
+console.log('Hello TypeScript!');
+```
+
+```sh
+tsc index.ts
+node index.js
+
+# or if you want with ts-node (npm install ts-node)
+npx ts-node index.ts
+```
+
+```html
+touch index.html
+
+<!doctype hmtl>
+<html>
+<head>
+  <script src="index.js"></script>
+</head>
+</html>
+```
+
+---
+
+## TSLint or ESLint
+Normally we would add a linter here, but with the current roadmap it's uncertain which one is the way forward.
+
+You use a linter to enforce or disable certain "patterns" of coding. This enforces a team coding standard.<!--.element: class="fragment" -->
+
+For advanced sessions or private studying. 😉<!--.element: class="fragment" -->
+
+(We use it to disable semicolons, etc.)<!--.element: class="fragment" -->
+
+---
+
+[ ] Uitstapje naar geleverde types. HTMLElement of fs
 
 Vervolg van de types die Martin heeft voorbereid. Groeperen?
+
+Aandachtspuntjes:
+- Imports / Exports
 
 Opdracht ideeën:
 - **Per categorie uit de README een opdracht**
 - Een JS bestand refactoren naar TS
 - Misschien een bestaande (of neppe) JS library voorzien een type definition (zonder sourcecode te editen)
-
-
-
-
-
-
 
 ---
 
@@ -149,19 +231,6 @@ Opdracht ideeën:
 ### Types in Javascript
 
 ```js
-const myString = 'my string'
-typeof myString // 'string'
-```
-
-Types available in Javascript: `string`, `number`, `boolean`, `undefined`, `object`, `function`.
-
-Basic typechecking is done in runtime.
-
-----
-
-### Typechecking in Javascript
-
-```js
 typeof 'some string' // -> string
 typeof 123 // -> number
 typeof true // -> boolean
@@ -170,15 +239,177 @@ typeof { key: 'value' } // -> object
 typeof ['array', 'values'] // -> object
 typeof function(){} // -> function
 ```
+Types available in Javascript: `string`, `number`, `boolean`, `undefined`, `object`, `function`.
+
+Basic typechecking is done in runtime.
+
+----
+
+### But we can do much better than this!
+
+TypeScript offers a lot more options to make your code typesafe.
+
+Typechecking is done during compile time and is removed from the compilation result.
+
+----
+
+- String
+```ts
+const myName: string = 'Martin'
+const myLastName: string = 123 // Error! Type '123' is not assignable to type 'string'.
+```
+
+- Number
+```ts
+const myAge: number = 29
+const daysLeftThisYear: number = '100' // Error! Type '"100"' is not assignable to type 'number'.
+```
+
+----
+
+- String Literal
+```ts
+let myType: 'A' | 'B' = 'A'
+myType = 'B' // Works!
+myType = 'Z' // Error! Type '"Z"' is not assignable to type '"A" | "B"'.
+```
+
+- Number Literal
+```ts
+let myType: 1 | 2 = 1
+myType = 2 // Works!
+myType = 9 // Error! Type '9' is not assignable to type '1 | 2'.
+```
+
+----
+
+```ts
+export type TextFileTypes = 'pdf' | 'doc' | 'md'
+
+function acceptTextFile(fileName: string, fileType: TextFileTypes) {
+    // Do things
+}
+
+acceptTextFile('bla.jpg', 'jpg') // Error!
+```
+
+----
+
+- Boolean
+```ts
+const hasChildren: boolean = true
+const amountOfChildren: boolean = 22 // Error! Type '22' is not assignable to type 'boolean'.
+```
+
+- Null / Undefined
+```ts
+const u: undefined = undefined;
+const n: null = null;
+```
+
+- Any
+
+Avoid where possible! Removes your typesafety!
+```ts
+const myAge: number = 28
+const yourAge: string = myAge // Error! Type 'number' is not assignable to type 'string'.
+co    nst yourAge: any = myAge // Works!
+```
+
+----
+
+- Array
+```ts
+const days: string[] = [ 'Monday', 'Tuesday', 'Wednesday' ]
+const years: number[] = [ 2018, 2019, 2020 ]
+
+const dates: number[] = [ 1, 2, '3' ] // Error! Type 'string' is not assignable to type 'number'.
+const dates2: Array<string | number> = [ 1, 2, '3' ] // Works!
+```
+
+- Tuple
+```ts
+const tuple: [ string, number ] = [ 'age', 28 ]
+const otherTuple: [ string, string ] = [ 'a', 'b', 'c' ] // Error! Types of property 'length' are incompatible. Type '3' is not assignable to type '2'.
+```
+
+----
+
+- Enum
+```ts
+enum ResponseCode {
+OK = 200,
+NOT_FOUND = 404
+}
+
+function getResponse(isOk: boolean): number {
+if (isOk) {
+    return ResponseCode.OK
+}
+
+return ResponseCode.NOT_FOUND
+}
+```
+
+----
+
+- Object
+```ts
+const myObject: object = { name: 'Henk' }
+const notAnObject: object = 1 // Error! Type '1' is not assignable to type 'object'.
+```
+- Record
+
+Looks like an object but is more limited.
+```ts
+const myRecord: Record<string, number> = { age: 22 }
+const myOtherRecord: Record<string, number[]> = { ages: [ 22, 65 ] }
+const faultyRecord: Record<boolean, string> = ... // Error! Type 'boolean' does not satisfy the constraint 'string | number | symbol'.
+```
+
+----
+
+- Never
+    
+Should -never- happen
+```ts
+function isHenk(name: 'Henk' | 'Piet') {
+    switch(name) {
+        case 'Henk':
+            return true
+        case 'Piet':
+            return false
+        default:
+            const exhaustive: never = name
+            throw exhaustive
+    }
+}
+```
+
+The compiler will let you know when you forgot adding a `case` for an expected value.
 
 ---
 
-### Types in TypeScript
+### Exercises basic types
+** Given a JS file, convert it to typescript (as typesafe as you can!)
+https://www.typescriptlang.org/play/?target=1#code/MYewdgzgLgBMCu0QFsCmAnCMC8MDaA3gFAykxgCGaAXDAOQBSFYdANCWQDYXQByVqWnQDSIAA4Y2HUqGRjmATyGjxAC2YATVJxgAhAHQA1fVLIwKGjelQQItYmbPAAllCX0AqlGvBVUU46k0NaoUEJePn4QNt4UFLAATAGBAF7OYgDCIFpCAIwJAMwALDAAgrp00jAAvuxm6CCcgvQZqs6oAGZ68ArOYADmMADyHR3OwJJ1ZBT9zUUAbES1MA5klDT0ABKoYADWyTDcfALKIOLIzAey8mDuImdi6mBaOgbGBxZWNnYrVU6udwiqF8-imgWCqFC4W8wKiMXQcUSBzMaUy2WadHyxTKFSqtSqDSaQla7S6AGUKE0sCMxhN0JVqgBdIhEPpQDAdCgTGAZRBQFAYX5mdbNYJ9fpVI5QfgbMUDKrXRS0OUSsyfay2WilSwaiAExqi7ziqozVAAfloYHgyAARhgliy3BIyjrvjghWQXG5lUaBmCYBCoQHff1-aisjlg+hjdUWR14GBgFBnOAYLMoNqvrYABQIJBodC0Xn5jAASg9pGsUHg6DAcD5AvQ+nV3wdRHjieTqfTpVmuYbBaLA7LFZgVZrdbz-ILzdmbdAkAN+k4IH62Z7fanjYgeFyjNLpaIC4gS5Xa57rpzW4LO4ADPvS0A
 
+---
 
+### `const` vs `let`
 
+```ts
+let myVar = 'my value'
+// What will be the type of `myVar`?
+
+const myOtherVar = 'my other value'
+// What will be the type of `myOtherVar`?
+```
+
+---
 
 ### Interfaces & Type Aliases
+** Given Object (of array of objecten): schrijf een passende typesafe interface. (jsonToTS.com)
 
 ---
 
@@ -189,3 +420,15 @@ typeof function(){} // -> function
 ### Functions
 
 ---
+
+
+** JS file bevat een bug, schrijf om naar TypeScript en fix de bug. (Compiler zou je moeten helpen als je het typesafe genoeg doet.)
+
+## Opdrachten
+- Schrijf een interface voor een given object
+- Schrijf een function type voor een given function
+- Refactor bestaande  (untyped) TS naar safe TS.
+- Javascript to typesafe TS
+- Spot and fix the bug
+- Refactor TS naar betere TS? ipv bijvoorbeeld het specifieker maken van types: `'value1' | 'value2' ` ipv `string`
+- 
