@@ -133,3 +133,59 @@ Opdracht ideeën:
 - **Per categorie uit de README een opdracht**
 - Een JS bestand refactoren naar TS
 - Misschien een bestaande (of neppe) JS library voorzien een type definition (zonder sourcecode te editen)
+
+
+
+
+
+
+
+---
+
+### Basic types
+
+----
+
+### Types in Javascript
+
+```js
+const myString = 'my string'
+typeof myString // 'string'
+```
+
+Types available in Javascript: `string`, `number`, `boolean`, `undefined`, `object`, `function`.
+
+Basic typechecking is done in runtime.
+
+----
+
+### Typechecking in Javascript
+
+```js
+typeof 'some string' // -> string
+typeof 123 // -> number
+typeof true // -> boolean
+typeof undefined // -> undefined
+typeof { key: 'value' } // -> object
+typeof ['array', 'values'] // -> object
+typeof function(){} // -> function
+```
+
+---
+
+### Types in TypeScript
+
+
+
+
+### Interfaces & Type Aliases
+
+---
+
+### Classes
+
+---
+
+### Functions
+
+---
