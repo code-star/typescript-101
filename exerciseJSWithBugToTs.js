@@ -39,9 +39,8 @@ function getPlaylistsSharedWithUserUuid(playlists, userUuid) {
     var sharedPlaylists = playlists.filter((playlist) => {
         return playlist.sharedWithUsers.find(user => user.uuid === userUuid) !== undefined
     })
+    return sharedPlaylists
 }
 
-
-
-// Programma opstellen om naar Koen te sturen + vooraf requirements
-// Checken bila actiepunten
+var playListsSharedWithUuid = getPlaylistsSharedWithUserUuid(playlistCollection, 'e1a8294e-b6ba-4254-be7b-bed073ec5f3a')
+console.log(playListsSharedWithUuid)
