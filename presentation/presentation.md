@@ -419,7 +419,97 @@ const myOtherVar = 'my other value'
 ---
 
 ### Interfaces & Type Aliases
-** Given Object (of array of objecten): schrijf een passende typesafe interface. (jsonToTS.com)
+
+ ```ts
+    interface Person {
+        name: string
+        age: number
+    }
+```
+
+Mainly used to define the expected shape of data coming from the outside.
+
+----
+
+ Optionals
+
+  ```ts
+  interface Person {
+    name: string
+    age?: number // this is optional
+  }
+  ```
+
+Handy when a value is sometimes not available
+
+----
+
+Extending
+
+```ts
+interface Person {
+  name: string
+  age: number
+}
+
+interface ExtendedPerson extends Person {
+  birthDate: Date
+  gender: 'male' | 'female'
+}
+```
+
+---- 
+
+Overriding
+
+```ts
+interface File {
+  name: string
+  icon: string
+}
+
+interface WordDocument extends File {
+  icon: 'word'
+}
+```
+
+This example narrows the `icon` `type` in a `WordDocument` object.
+
+---- 
+
+Readonly 
+
+```ts
+interface Person {
+    readonly name: string
+    age: number
+}
+
+const person: Person = { name: 'Henk', age: 22 }
+person.name = 'Piet' // Error! Cannot assign to 'name' because it is a read-only property.
+```
+
+Doesn't actually enforce immutability, but makes sure that on compile time; we're not reassigning any readonly values.
+
+---
+
+Type aliases
+
+Almost the same as `interface` but;
+* Is not extendable
+* Is not overridable
+* Different syntax
+
+```ts
+type Person = {
+    name: string
+    age: number
+}
+```
+
+--- 
+
+** Opdracht: Given Object (of array of objecten): schrijf een passende typesafe interface. (jsonToTS.com)
 
 ---
 
