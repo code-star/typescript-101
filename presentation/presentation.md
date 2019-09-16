@@ -210,20 +210,6 @@ For advanced sessions or private studying. 😉<!--.element: class="fragment" --
 
 ---
 
-[ ] Uitstapje naar geleverde types. HTMLElement of fs
-
-Vervolg van de types die Martin heeft voorbereid. Groeperen?
-
-Aandachtspuntjes:
-- Imports / Exports
-
-Opdracht ideeën:
-- **Per categorie uit de README een opdracht**
-- Een JS bestand refactoren naar TS
-- Misschien een bestaande (of neppe) JS library voorzien een type definition (zonder sourcecode te editen)
-
----
-
 ### Basic types
 
 ----
@@ -316,7 +302,7 @@ Avoid where possible! Removes your typesafety!
 ```ts
 const myAge: number = 28
 const yourAge: string = myAge // Error! Type 'number' is not assignable to type 'string'.
-co    nst yourAge: any = myAge // Works!
+const yourAge: any = myAge // Works!
 ```
 
 ----
@@ -458,7 +444,7 @@ interface ExtendedPerson extends Person {
 }
 ```
 
----- 
+----
 
 Overriding
 
@@ -475,7 +461,7 @@ interface WordDocument extends File {
 
 This example narrows the `icon` `type` in a `WordDocument` object.
 
----- 
+----
 
 Readonly 
 
@@ -507,9 +493,26 @@ type Person = {
 }
 ```
 
---- 
+----
 
-** Opdracht: Given Object (of array of objecten): schrijf een passende typesafe interface. (jsonToTS.com)
+```ts
+export type FileId = string
+export type FileTypes = 'pdf' | 'doc' | 'txt' | 'md'
+
+export interface File {
+  id: FileId
+  type: FileTypes
+  name: string
+  // etc.
+}
+```
+
+---
+
+### Exercise 2
+Take `exercises/2_json_to_types.ts`, create interfaces and types for the data. 
+
+Make it as typesafe as you can of course!
 
 ---
 
@@ -521,6 +524,19 @@ type Person = {
 
 ---
 
+[ ] Uitstapje naar geleverde types. HTMLElement of fs
+
+Vervolg van de types die Martin heeft voorbereid. Groeperen?
+
+Aandachtspuntjes:
+- Imports / Exports
+
+Opdracht ideeën:
+- **Per categorie uit de README een opdracht**
+- Een JS bestand refactoren naar TS
+- Misschien een bestaande (of neppe) JS library voorzien een type definition (zonder sourcecode te editen)
+
+---
 
 ** JS file bevat een bug, schrijf om naar TypeScript en fix de bug. (Compiler zou je moeten helpen als je het typesafe genoeg doet.)
 
