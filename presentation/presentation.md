@@ -518,6 +518,260 @@ Make it as typesafe as you can of course!
 
 ### Classes
 
+Comparable to what you see in Java, PHP, etc.
+
+----
+
+In ES5
+
+```js
+var MyClass = /** @class */ (function () {
+    function MyClass(name) {
+        this.name = name;
+    }
+    return MyClass;
+}());
+```
+
+----
+
+ES6 / ES2017
+
+```js
+class MyClass {
+  constructor(name) {
+    this.name = name
+  }
+}
+```
+
+----
+
+### Auto assignment
+
+```ts
+class MyClass {
+  constructor(public name: string) {}
+}
+```
+
+```js
+// Transpiles to
+class MyClass {
+    constructor(name) {
+        this.name = name; // We get this assignment for free!
+    }
+}
+
+```
+<!--.element: class="fragment" -->
+
+----
+
+### Access modifiers
+
+`private` vs. `protected` vs. `public`
+
+Makes parts of a class accessible and visible to external implementation.
+
+```ts
+class Controller {
+  constructor(private isActive: boolean) {}
+
+  getIsActive() { // public is default on methods.
+    return this.isActive
+  }
+
+  protected protectedIsActive {
+    return this.getIsActive()
+  }
+}
+
+const controller = new Controller(false)
+controller.protectedIsActive()
+controller.isActive 
+// Error! Property 'isActive' is private and only accessible within class 'DroneController'.
+```
+
+----
+
+```ts
+class User {
+  constructor(private id: string, public name: string) {}
+}
+```
+
+```ts
+const me = new User('12345-abcd', 'my.user.name')
+console.log(me.id) 
+// ERROR: Property 'id' is private and only accessible within class 'User'.
+```
+
+----
+
+### Inheritance (implements)
+
+```ts
+interface IDroneController {
+  isActive: boolean
+}
+
+class DroneController implements IDroneController {
+  // ERROR:
+  // Class 'DroneController' incorrectly implements interface 'IDroneController'.
+  // Property 'isActive' is missing in type 'DroneController' but required in type
+  // 'IDroneController'.
+}
+```
+
+Useful when you have multiple implementations, but they need to adhere to a standard. Compiler prevents you from forgetting a method or variable. 
+
+----
+
+### Inheritence (extends)
+
+ ```ts
+class Controller {
+  isActive: boolean
+
+  constructor(isActive: boolean) {
+    this.isActive = isActive
+  }
+
+  getIsActive(): boolean {
+    return this.isActive
+  }
+}
+
+class DroneController extends Controller {
+  altitude: number
+
+  constructor(isActive: boolean, altitude: number) {
+    super(isActive)
+    this.altitude = altitude
+  }
+
+  getState() {
+    return {
+      isActive: super.getIsActive(),
+      altitude: this.altitude
+    }
+  }
+}
+
+const drone = new DroneController(true, 0)
+```
+
+Useful to create classes with the same basis, to prevent duplicate code and enforcing business rules.
+
+----
+
+### Inheritence (Abstract)
+
+```ts
+abstract class Controller {
+  private isActive: boolean
+
+  constructor(isActive: boolean) {
+    this.isActive = isActive
+  }
+
+  protected abstract blieb(): void // must be implemented in derived classes
+}
+
+class DroneController extends Controller {
+  constructor(isActive: boolean) {
+    super(isActive)
+  }
+
+  protected blieb() {
+    MOTORS.zoom()
+  }
+}
+```
+
+----
+
+### Readonly
+```ts
+class Controller {
+  readonly isActive: boolean
+
+  constructor(isActive: boolean) {
+    // we can only assign readonlys in the constructor
+    this.isActive = isActive
+  }
+
+  someFunction() {
+    this.isActive = false // Error! Cannot assign to 'isActive' because it is a read-only property.
+  }
+}
+
+const controller = new Controller(true)
+controller.isActive = // Error! Cannot assign to 'isActive' because it is a read-only 
+```
+
+----
+
+### Getters and Setters
+
+```ts
+// Meh
+class Controller {
+  isActive: boolean
+}
+
+const controller = new Controller()
+controller.isActive = true
+
+const controllerState = controller.isActive // true
+```
+
+----
+
+### Getters and Setters
+
+```ts
+// Yeah!
+class Controller {
+  private _isActive: boolean
+
+  get isActive(): boolean {
+    return this._isActive
+  }
+
+  set isActive(isActive: boolean) {
+    this._isActive = isActive
+  }
+}
+
+const controller = new Controller()
+controller.isActive = false // Calls the `isActive()` function with set in front.
+
+const controllerState = controller.isActive // false
+```
+
+Getters and Setters gives us more control about getting and setting state.
+
+----
+
+### Static
+```ts
+class Controller {
+  static type: string = 'drone'
+
+  static blieb() {
+    // make some noise
+  }
+}
+
+const controllerType = Controller.type // 'drone'
+
+Controller.blieb() // makes noise!
+```
+
+Static properties or methods are available without constructing the class.
+
 ---
 
 ### Functions
