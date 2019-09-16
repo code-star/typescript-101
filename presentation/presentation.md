@@ -778,9 +778,13 @@ Static properties or methods are available without constructing the class.
 
 ---
 
-[ ] Uitstapje naar geleverde types. HTMLElement of fs
+Exercise 3 - Use classes, functions and interfaces/types to refactor a JS or basic TS file into a more typesafe and readable format.
 
-Vervolg van de types die Martin heeft voorbereid. Groeperen?
+---
+
+Exercise 4 - The given JS file contains a bug. Refactor to TypeScript and see if you can isolate and fix the bug by increasing typesafety.
+
+---
 
 Aandachtspuntjes:
 - Imports / Exports
@@ -789,8 +793,6 @@ Opdracht ideeën:
 - **Per categorie uit de README een opdracht**
 - Een JS bestand refactoren naar TS
 - Misschien een bestaande (of neppe) JS library voorzien een type definition (zonder sourcecode te editen)
-
----
 
 ** JS file bevat een bug, schrijf om naar TypeScript en fix de bug. (Compiler zou je moeten helpen als je het typesafe genoeg doet.)
 
