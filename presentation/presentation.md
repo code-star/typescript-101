@@ -210,20 +210,6 @@ For advanced sessions or private studying. 😉<!--.element: class="fragment" --
 
 ---
 
-[ ] Uitstapje naar geleverde types. HTMLElement of fs
-
-Vervolg van de types die Martin heeft voorbereid. Groeperen?
-
-Aandachtspuntjes:
-- Imports / Exports
-
-Opdracht ideeën:
-- **Per categorie uit de README een opdracht**
-- Een JS bestand refactoren naar TS
-- Misschien een bestaande (of neppe) JS library voorzien een type definition (zonder sourcecode te editen)
-
----
-
 ### Basic types
 
 ----
@@ -316,7 +302,7 @@ Avoid where possible! Removes your typesafety!
 ```ts
 const myAge: number = 28
 const yourAge: string = myAge // Error! Type 'number' is not assignable to type 'string'.
-co    nst yourAge: any = myAge // Works!
+const yourAge: any = myAge // Works!
 ```
 
 ----
@@ -419,11 +405,372 @@ const myOtherVar = 'my other value'
 ---
 
 ### Interfaces & Type Aliases
-** Given Object (of array of objecten): schrijf een passende typesafe interface. (jsonToTS.com)
+
+ ```ts
+    interface Person {
+        name: string
+        age: number
+    }
+```
+
+Mainly used to define the expected shape of data coming from the outside.
+
+----
+
+ Optionals
+
+  ```ts
+  interface Person {
+    name: string
+    age?: number // this is optional
+  }
+  ```
+
+Handy when a value is sometimes not available
+
+----
+
+Extending
+
+```ts
+interface Person {
+  name: string
+  age: number
+}
+
+interface ExtendedPerson extends Person {
+  birthDate: Date
+  gender: 'male' | 'female'
+}
+```
+
+----
+
+Overriding
+
+```ts
+interface File {
+  name: string
+  icon: string
+}
+
+interface WordDocument extends File {
+  icon: 'word'
+}
+```
+
+This example narrows the `icon` `type` in a `WordDocument` object.
+
+----
+
+Readonly 
+
+```ts
+interface Person {
+    readonly name: string
+    age: number
+}
+
+const person: Person = { name: 'Henk', age: 22 }
+person.name = 'Piet' // Error! Cannot assign to 'name' because it is a read-only property.
+```
+
+Doesn't actually enforce immutability, but makes sure that on compile time; we're not reassigning any readonly values.
+
+---
+
+Type aliases
+
+Almost the same as `interface` but;
+* Is not extendable
+* Is not overridable
+* Different syntax
+
+```ts
+type Person = {
+    name: string
+    age: number
+}
+```
+
+----
+
+```ts
+export type FileId = string
+export type FileTypes = 'pdf' | 'doc' | 'txt' | 'md'
+
+export interface File {
+  id: FileId
+  type: FileTypes
+  name: string
+  // etc.
+}
+```
+
+---
+
+### Exercise 2
+Take `exercises/2_json_to_types.ts`, create interfaces and types for the data. 
+
+Make it as typesafe as you can of course!
 
 ---
 
 ### Classes
+
+Comparable to what you see in Java, PHP, etc.
+
+----
+
+In ES5
+
+```js
+var MyClass = /** @class */ (function () {
+    function MyClass(name) {
+        this.name = name;
+    }
+    return MyClass;
+}());
+```
+
+----
+
+ES6 / ES2017
+
+```js
+class MyClass {
+  constructor(name) {
+    this.name = name
+  }
+}
+```
+
+----
+
+### Auto assignment
+
+```ts
+class MyClass {
+  constructor(public name: string) {}
+}
+```
+
+```js
+// Transpiles to
+class MyClass {
+    constructor(name) {
+        this.name = name; // We get this assignment for free!
+    }
+}
+
+```
+<!--.element: class="fragment" -->
+
+----
+
+### Access modifiers
+
+`private` vs. `protected` vs. `public`
+
+Makes parts of a class accessible and visible to external implementation.
+
+```ts
+class Controller {
+  constructor(private isActive: boolean) {}
+
+  getIsActive() { // public is default on methods.
+    return this.isActive
+  }
+
+  protected protectedIsActive {
+    return this.getIsActive()
+  }
+}
+
+const controller = new Controller(false)
+controller.protectedIsActive()
+controller.isActive 
+// Error! Property 'isActive' is private and only accessible within class 'DroneController'.
+```
+
+----
+
+```ts
+class User {
+  constructor(private id: string, public name: string) {}
+}
+```
+
+```ts
+const me = new User('12345-abcd', 'my.user.name')
+console.log(me.id) 
+// ERROR: Property 'id' is private and only accessible within class 'User'.
+```
+
+----
+
+### Inheritance (implements)
+
+```ts
+interface IDroneController {
+  isActive: boolean
+}
+
+class DroneController implements IDroneController {
+  // ERROR:
+  // Class 'DroneController' incorrectly implements interface 'IDroneController'.
+  // Property 'isActive' is missing in type 'DroneController' but required in type
+  // 'IDroneController'.
+}
+```
+
+Useful when you have multiple implementations, but they need to adhere to a standard. Compiler prevents you from forgetting a method or variable. 
+
+----
+
+### Inheritence (extends)
+
+ ```ts
+class Controller {
+  isActive: boolean
+
+  constructor(isActive: boolean) {
+    this.isActive = isActive
+  }
+
+  getIsActive(): boolean {
+    return this.isActive
+  }
+}
+
+class DroneController extends Controller {
+  altitude: number
+
+  constructor(isActive: boolean, altitude: number) {
+    super(isActive)
+    this.altitude = altitude
+  }
+
+  getState() {
+    return {
+      isActive: super.getIsActive(),
+      altitude: this.altitude
+    }
+  }
+}
+
+const drone = new DroneController(true, 0)
+```
+
+Useful to create classes with the same basis, to prevent duplicate code and enforcing business rules.
+
+----
+
+### Inheritence (Abstract)
+
+```ts
+abstract class Controller {
+  private isActive: boolean
+
+  constructor(isActive: boolean) {
+    this.isActive = isActive
+  }
+
+  protected abstract blieb(): void // must be implemented in derived classes
+}
+
+class DroneController extends Controller {
+  constructor(isActive: boolean) {
+    super(isActive)
+  }
+
+  protected blieb() {
+    MOTORS.zoom()
+  }
+}
+```
+
+----
+
+### Readonly
+```ts
+class Controller {
+  readonly isActive: boolean
+
+  constructor(isActive: boolean) {
+    // we can only assign readonlys in the constructor
+    this.isActive = isActive
+  }
+
+  someFunction() {
+    this.isActive = false // Error! Cannot assign to 'isActive' because it is a read-only property.
+  }
+}
+
+const controller = new Controller(true)
+controller.isActive = // Error! Cannot assign to 'isActive' because it is a read-only 
+```
+
+----
+
+### Getters and Setters
+
+```ts
+// Meh
+class Controller {
+  isActive: boolean
+}
+
+const controller = new Controller()
+controller.isActive = true
+
+const controllerState = controller.isActive // true
+```
+
+----
+
+### Getters and Setters
+
+```ts
+// Yeah!
+class Controller {
+  private _isActive: boolean
+
+  get isActive(): boolean {
+    return this._isActive
+  }
+
+  set isActive(isActive: boolean) {
+    this._isActive = isActive
+  }
+}
+
+const controller = new Controller()
+controller.isActive = false // Calls the `isActive()` function with set in front.
+
+const controllerState = controller.isActive // false
+```
+
+Getters and Setters gives us more control about getting and setting state.
+
+----
+
+### Static
+```ts
+class Controller {
+  static type: string = 'drone'
+
+  static blieb() {
+    // make some noise
+  }
+}
+
+const controllerType = Controller.type // 'drone'
+
+Controller.blieb() // makes noise!
+```
+
+Static properties or methods are available without constructing the class.
 
 ---
 
@@ -431,6 +778,21 @@ const myOtherVar = 'my other value'
 
 ---
 
+Exercise 3 - Use classes, functions and interfaces/types to refactor a JS or basic TS file into a more typesafe and readable format.
+
+---
+
+Exercise 4 - The given JS file contains a bug. Refactor to TypeScript and see if you can isolate and fix the bug by increasing typesafety.
+
+---
+
+Aandachtspuntjes:
+- Imports / Exports
+
+Opdracht ideeën:
+- **Per categorie uit de README een opdracht**
+- Een JS bestand refactoren naar TS
+- Misschien een bestaande (of neppe) JS library voorzien een type definition (zonder sourcecode te editen)
 
 ** JS file bevat een bug, schrijf om naar TypeScript en fix de bug. (Compiler zou je moeten helpen als je het typesafe genoeg doet.)
 

@@ -65,39 +65,39 @@ function multiplyAge(person: Person) {
 
 * Basic types
 
-  - String
+  - String X
     ```ts
     const myName: string = 'Martin'
     const myLastName: string = 123 // Error! Type '123' is not assignable to type 'string'.
     ```
 
-  - String Literal
+  - String Literal X
     ```ts
     let myType: 'A' | 'B' = 'A'
     myType = 'B' // Works!
     myType = 'Z' // Error! Type '"Z"' is not assignable to type '"A" | "B"'.
     ```
 
-  - Number
+  - Number X
     ```ts
     const myAge: number = 28
     const daysLeftThisYear: number = '100' // Error! Type '"100"' is not assignable to type 'number'.
     ```
 
-  - Number Literal
+  - Number Literal X
     ```ts
     let myType: 1 | 2 = 1
     myType = 2 // Works!
     myType = 9 // Error! Type '9' is not assignable to type '1 | 2'.
     ```
 
-  - Boolean
+  - Boolean X
     ```ts
     const hasChildren: boolean = true
     const amountOfChildren: boolean = 22 // Error! Type '22' is not assignable to type 'boolean'.
     ```
 
-  - Array
+  - Array X
     ```ts
     const days: string[] = [ 'Monday', 'Tuesday', 'Wednesday' ]
     const years: number[] = [ 2018, 2019, 2020 ]
@@ -106,14 +106,14 @@ function multiplyAge(person: Person) {
     const dates2: Array<string | number> = [ 1, 2, '3' ] // Works!
     ```
 
-  - Tuple
+  - Tuple X
     ```ts
     const tuple: [ string, number ] = [ 'age', 28 ]
     const otherTuple: [ string, string ] = [ 'a', 'b', 'c' ] // Error! Types of property 'length' are incompatible. Type '3' is not assignable to type '2'.
     ```
 
-  - Enum
-    ```ts
+  - Enum X
+    ```ts 
     enum ResponseCode {
         OK = 200,
         NOT_FOUND = 404
@@ -179,12 +179,12 @@ function multiplyAge(person: Person) {
     }
     ```
 
-  - Object
+  - Object X
     ```ts
     const myObject: object = { name: 'Henk' }
     const notAnObject: object = 1 // Error! Type '1' is not assignable to type 'object'.
     ```
-  - Record
+  - Record X
 
     Looks like an object but is more limited.
     ```ts
@@ -193,7 +193,7 @@ function multiplyAge(person: Person) {
     const faultyRecord: Record<boolean, string> = ... // Error! Type 'boolean' does not satisfy the constraint 'string | number | symbol'.
     ```
 
-* Interfaces & Type aliases
+* Interfaces & Type aliases X
   - Interfaces
     ```ts
     interface Person {
@@ -202,7 +202,7 @@ function multiplyAge(person: Person) {
     }
     ```
 
-  - Readonly
+  - Readonly X
     ```ts
     interface Person {
         readonly name: string
@@ -213,7 +213,7 @@ function multiplyAge(person: Person) {
     person.name = 'Piet' // Error! Cannot assign to 'name' because it is a read-only property.
     ```
 
-  - Optionals
+  - Optionals X
     ```ts
     interface Person {
       name: string
@@ -221,7 +221,7 @@ function multiplyAge(person: Person) {
     }
     ```
 
-  - Extending
+  - Extending X
     ```ts
     interface Person {
       name: string
@@ -234,7 +234,7 @@ function multiplyAge(person: Person) {
     }
     ```
 
-  - Overriding
+  - Overriding X
     ```ts
     interface File {
       name: string
