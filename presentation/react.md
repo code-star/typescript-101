@@ -21,7 +21,13 @@
 
 ---
 
-### What is React?
+### What are we going to build?
+
+☢️ ➡️ [⏱](https://stackblitz.com/edit/typescript-react-stopwatch-result)
+
+---
+
+### ⚠️ But first: What is React?
 Anyone?
 
 ---
@@ -85,6 +91,75 @@ const App = () => (
 
 ---
 
+### Native element properties
+
+```jsx
+const App = () => (
+  <div 
+    style={{ textTransform: 'uppercase' }}
+    className={'myClassName'}>
+      ...
+  </div>
+)
+```
+
+---
+
+### Styling using CSS stylesheet
+
+Using normal CSS
+
+```jsx
+import classes from './styles.css'
+
+const App = () => (
+  <div className={classes.myClassName}>
+      ...
+  </div>
+)
+```
+
+---
+
+### Styling using inline styles
+
+Using CSS-in-JS
+
+```jsx
+const App = () => (
+  <div style={{
+      fontSize: '18px',
+      backgroundColor: 'green'
+    }}>
+      ...
+  </div>
+)
+```
+
+<small>(not recommended, but easy to start with)</small>
+
+---
+
+### Lets code!
+
+Start your project here! ️
+
+️➡️ https://stackblitz.com/fork/react-ts
+
+
+---
+
+### Exercise 1
+
+- Time
+- Start / stop button
+- New lap button
+<center>
+  <img src="assets/stopwatch.png" height="100" style="text-align: center" />
+</center>
+
+---
+
 ### Conditionals
 
 ```jsx
@@ -101,12 +176,12 @@ const App = () => (
 ### Native element properties
 
 ```jsx
+const buttonDisabled = true
 const App = () => (
-  <div 
-    style={{ textTransform: 'uppercase' }}
-    className={'myClassName'}>
-      ...
-  </div>
+  <input
+    type={'button'}
+    value={'Click me!'}
+    disabled={buttonDisabled} />
 )
 ```
 
@@ -129,7 +204,7 @@ const App = () => (
 
 ---
 
-### Additional benefits
+### Additional JSX/TSX benefits
 
 - Prevents injection attacks
 - Composable using `children`
@@ -166,6 +241,221 @@ const App = () => (
 
 ---
 
+### State
+
+- Store information inside your component
+- Useful for forms, loading state and much more
+
+---
+
+### State example 0
+
+```jsx
+const App: FC = () => {
+  const [username, setUsername] = useState('')
+  return (
+    <div>
+      <input
+        type={'text'}
+        value={username}
+        onChange={event => setUsername(event.target.value)}
+      />
+    </div>
+  )
+}
+```
+
+---
+
+### State example 1
+
+```jsx
+const App = () => {
+  const [isLoading, setIsLoading] = useState(true)
+
+  setTimeout(() => setIsLoading(false), 5000)
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+  return <div>Loading complete!</div>
+}
+```
+
+---
+
+### State example 2
+
+```jsx
+const App = () => {
+  const [user, setUser] = useState<User | false>(false)
+
+  fetchUser()
+    .then((user: User) => setUser(user))
+
+  if (!user) {
+    return <div>Loading user...</div>
+  }
+  return <div>Username: {user.name}</div>
+}
+```
+
+---
+
+### Exercise 2
+
+Keep in state:
+
+- The seconds that have passed,
+- The state of the stopwatch: started / stopped,
+- The created laps (hint: this will be an array of numbers)
+
+```ts
+const [prop, setProp] = useState( ... )
+```
+
+---
+
+### Exercise 3
+
+Update the state:
+
+- When the start/stop button is clicked
+- When the New lap button is clicked
+- The text of the start/stop button should depend on the state
+
+---
+
+### Effects
+
+- Perform side effects
+- Use the component lifecycle
+
+---
+
+### On mount
+
+```jsx
+const App = () => {
+
+  useEffect(() => {
+    alert('The component is mounted!')
+  }, [])
+
+  return <div>...</div>
+}
+```
+
+---
+
+### On props / state update
+
+```jsx
+const App = () => {
+
+  useEffect(() => {
+    alert('The props or state has changed!')
+  })
+
+  return <div>...</div>
+}
+```
+---
+
+### On specific prop / state update
+
+```jsx
+const App = props => {
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    alert('The title prop or isLoading state has changed!')
+  }, [props.title, isLoading])
+
+  return <div>...</div>
+}
+```
+
+---
+
+### What happens here?
+
+```jsx
+let timer = 0
+
+const App = () => {
+
+  useEffect(() => {
+    timer = setInterval(() => console.log('tick'), 1000)
+  }, [])
+
+  return <div>...</div>
+}
+```
+
+---
+
+### Effect with cleanup
+
+```jsx
+let timer = 0
+
+const App = () => {
+
+  useEffect(() => {
+    timer = setInterval(() => console.log('tick'), 1000)
+
+    return function cleanup() {
+      clearInterval(timer)
+    }
+  }, [])
+
+  return <div>...</div>
+}
+```
+
+---
+
+### Exercise 4
+
+When the stopwatch start button is clicked:
+
+- Start the timer and update the `seconds` state every second
+
+Hint: use `setInterval` here
+
+---
+
+### Exercise 5
+
+When the stopwatch stop button is clicked:
+
+- Stop the timer
+
+Hint: use `clearInterval` here
+
+---
+
+### Exersice 6
+
+When the New lap button is clicked:
+
+- Add the seconds that are currently in state to the laps state
+
+---
+
+### Exersice 7
+
+Show all the laps on the screen
+
+Hint: use `.map()` here.
+
+<center>
+  <img src="assets/stopwatch2.png" height="150" style="text-align: center" />
+</center>
+
+---
+
 ### Props
 
 Pass information to your components:
@@ -196,6 +486,12 @@ const App = props => (
 
 ---
 
+### But wait... what is props.?
+
+### I'm missing types here!
+
+---
+
 ### Typesafe Props
 
 Define the type of your props:
@@ -203,6 +499,7 @@ Define the type of your props:
 ```ts
 type AppProps = {
   title: string
+  isloading: boolean
 }
 ```
 
@@ -225,7 +522,7 @@ More about this later!
 
 ---
 
-### Functions as prop
+### Functions / callbacks as prop
 
 ```ts
 type AppProps = {
@@ -236,18 +533,86 @@ type AppProps = {
 ```jsx
 const App: FC<AppProps> = props => (
   <div>
-    <button onClick={props.onLogin()}>Login!</div>
+    <button onClick={props.onLogin}>Login!</button>
   </div>
 )
 ```
 
 ---
 
+### Define the function and pass through
+
 ```jsx
+const onLogin = () => {
+  // some magic happens
+}
+```
+
+```jsx
+<App onLogin={onLogin} />
 ```
 
 ---
 
-Todo:
+### Typesafe Props
 
-create-react-app
+```ts
+type AppProps = {
+  title: string
+}
+```
+
+```
+<App />
+```
+
+What will happen here?
+
+---
+
+```
+Type '{}' is not assignable to type 'Readonly<AppProps>'.
+  Property 'title' is missing in type '{}'.
+```
+
+---
+
+### Exercise 7
+
+Split your component up into smaller components and files.
+
+Use props to send information to your components.
+
+---
+
+### Children
+
+...
+
+---
+
+### Possible end result
+
+[➡️ Click]((https://stackblitz.com/edit/typescript-react-stopwatch-result))
+
+---
+
+### FunctionComponent vs. ClassComponent
+
+---
+
+### Bonus exercise 1
+
+Refactor your code to use a Container Component which handles all the state and passes it through presentational components
+
+---
+
+### Bonus exercise 2
+
+Try to refactor a FunctionComponent into a ClassComponent.
+
+---
+
+### Resources
+
+- create-react-app
