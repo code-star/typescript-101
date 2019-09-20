@@ -21,9 +21,30 @@
 
 ---
 
+### Expectation management
+
+- Interactive + live coding exercises
+- React + TypeScript
+- TSX
+- States, Effects, Props
+- Component composition
+- Containers vs. Presentational components
+
+---
+
+### ⚠️ Disclaimer
+
+- React v16.8+ ️️️️️☣️
+- Hooks instead of Classes 🏴‍☠️
+- TSX 💯
+- StackBlitz 🚀
+- Contains some inline styling 🙀 YUK! 🤮
+
+---
+
 ### What are we going to build?
 
-☢️ ➡️ [⏱](https://stackblitz.com/edit/typescript-react-stopwatch-result)
+☣️ ➡️ [⏱](https://typescript-react-stopwatch-result.stackblitz.io)
 
 ---
 
@@ -39,6 +60,7 @@ Anyone?
 - Alternative for Angular / Vue / etc etc
 - Basic and compact
 - Scales for bigger applications as well
+- Works nicely with State Management solutions (Redux, MobX, GraphQL)
 
 ---
 
@@ -76,7 +98,7 @@ const App = () => (
 
 ---
 
-### JavaScript + Markup
+### Markup + JavaScript
 
 Use regular JavaScript between `{` ... `}`:
 
@@ -100,6 +122,20 @@ const App = () => (
     className={'myClassName'}>
       ...
   </div>
+)
+```
+
+---
+
+### Native element properties
+
+```jsx
+const buttonDisabled = true
+const App = () => (
+  <input
+    type={'button'}
+    value={'Click me!'}
+    disabled={buttonDisabled} />
 )
 ```
 
@@ -173,20 +209,6 @@ const App = () => (
 
 ---
 
-### Native element properties
-
-```jsx
-const buttonDisabled = true
-const App = () => (
-  <input
-    type={'button'}
-    value={'Click me!'}
-    disabled={buttonDisabled} />
-)
-```
-
----
-
 ### Iterations
 
 ```jsx
@@ -234,10 +256,6 @@ const App = () => (
 - Typesafety inside your views
 - Definitions of your `props` and `state`
 - No need of `PropTypes`
-
----
-
-### ⚠️ TSX only from now on!
 
 ---
 
@@ -304,14 +322,17 @@ const App = () => {
 
 ### Exercise 2
 
-Keep in state:
+Setup state:
 
 - The seconds that have passed,
 - The state of the stopwatch: started / stopped,
 - The created laps (hint: this will be an array of numbers)
 
 ```ts
+
 const [prop, setProp] = useState( ... )
+
+
 ```
 
 ---
@@ -441,14 +462,19 @@ Hint: use `clearInterval` here
 When the New lap button is clicked:
 
 - Add the seconds that are currently in state to the laps state
+- Reset the timer to 0 seconds
 
 ---
 
 ### Exersice 7
 
-Show all the laps on the screen
+- Covert the seconds in state to minutes and seconds and display it on the screen
 
-Hint: use `.map()` here.
+  Hint: `Math.floor(seconds / 60)` && `seconds % 60`
+
+- Show all the laps on the screen
+
+  Hint: use `.map()` here.
 
 <center>
   <img src="assets/stopwatch2.png" height="150" style="text-align: center" />
@@ -571,8 +597,11 @@ What will happen here?
 ---
 
 ```
+
 Type '{}' is not assignable to type 'Readonly<AppProps>'.
   Property 'title' is missing in type '{}'.
+
+
 ```
 
 ---
@@ -587,17 +616,166 @@ Use props to send information to your components.
 
 ### Children
 
-...
+```jsx
+const Page: FC = props => (
+  <div>
+    {props.children}
+  </div>
+)
+```
+
+```jsx
+<Page>
+  <div>
+    I'm the child
+  </div>
+</Page>
+```
+
+---
+
+### Composition example
+
+```jsx
+<App>
+  <Header>
+    <Navigation />
+  </Header>
+  <Content>
+    <SearchForm />
+  </Content>
+</App>
+```
+
+---
+
+### Container vs. Presentational Component
+
+Or: smart vs. dumb
+
+Or fat vs. skinny
+
+Or statefull vs. pure
+
+Or screens vs. components
+
+https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
+
+---
+
+### Container Component
+
+- Fetches data
+- Keeps track of state
+- Possibly connected to a State Store (Redux / MobX)
+- Passes all the data to its children
+- Does NOT contain styles
+
+---
+
+### Presentational Component
+
+- Renders UI
+- Contains styling
+- Easily testable
+- As dumb as possible
 
 ---
 
 ### Possible end result
 
-[➡️ Click]((https://stackblitz.com/edit/typescript-react-stopwatch-result))
+[➡️ Click](https://stackblitz.com/edit/typescript-react-stopwatch-result)
 
 ---
 
-### FunctionComponent vs. ClassComponent
+### Function vs. Class
+
+Props
+
+```jsx
+const App: FC<Props> = props => <div>{props.title}</div>
+```
+
+```jsx
+class App extends React.Component<Props> {
+  public render() {
+    return <div>{this.props.title}</div>
+  }
+}
+```
+
+---
+
+### Function Component
+
+On mount & State
+
+```jsx
+const App: FC<Props> = props => {
+  const [user, setUser] = useState(false)
+
+  useEffect(() => {
+    fetchUser()
+      .then(user => setUser(user))
+  }, [])
+}
+```
+
+---
+
+### Class Component
+
+On mount & State
+
+```jsx
+class App extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      user: false
+    }
+  }
+
+  public async componentDidMount() {
+    const user = await fetchUser()
+    this.setState({
+      user
+    })
+  }
+}
+```
+
+---
+
+### React Hooks
+
+- Recommended approach
+- Class Components will be removed from the core
+
+---
+
+### Wrap-up
+
+- React + TypeScript
+- TSX
+- States, Effects, Props
+- Component composition
+- Containers vs. Presentationals
+
+---
+
+### Resources
+
+- create-react-app
+- https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
+- https://reactjs.org/docs/hooks-custom.html
+
+---
+
+### 🙌 Thanks 🙌
+
+
+Questions anyone?
 
 ---
 
@@ -610,9 +788,3 @@ Refactor your code to use a Container Component which handles all the state and 
 ### Bonus exercise 2
 
 Try to refactor a FunctionComponent into a ClassComponent.
-
----
-
-### Resources
-
-- create-react-app
