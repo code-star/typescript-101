@@ -1,3 +1,5 @@
+// Exercise 2 - Convert JSON structure to TypeScript type(s)
+
 const data = {
 	id: 'gfjdvlk934590afdjl41_539s0',
 	location: {

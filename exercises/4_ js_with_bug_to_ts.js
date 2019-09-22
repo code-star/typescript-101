@@ -1,3 +1,5 @@
+// Exercise 4
+//
 // The code in this file contains a bug.
 // 1. Convert the code from JS to TS to find out where it is going wrong.
 // 2. Fix the bugs so that the code works correctly.

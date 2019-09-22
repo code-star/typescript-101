@@ -1,3 +1,5 @@
+// Exercise 1 - Convert from JavaScript to TypeScript
+
 var customers = [{
     name: 'Jan',
     lastName: 'Koper',

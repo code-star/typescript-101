@@ -8,14 +8,14 @@
   <img src="assets/bjorn.jpg" width="100" style="border-radius:100%; display: inline-flex;">
   <h1 style="font-size: 0.9em;">Bjorn Schijff</h1>
   <small style="display: inline-flex;">Frontend Software Engineer @ Politie</small>
-  <img src="assets/codestar.svg" height="30" style="border: 0; background-color: transparent;"><br /><br />
+  <img src="assets/codestar.svg" height="30" style="border: 0; background-color: transparent;"><br />
    <small>@Bjeaurn<br /> bjorn.schijff@ordina.nl</small>
 </div>
 <div style="float: right; width: 45%;">
   <img src="assets/martin.jpg" width="100" style="border-radius:100%; display: inline-flex;">
   <h1 style="font-size: 0.9em;">Martin van Dam</h1>
-<small>Frontend Software Engineer @ BZK</small>
-  <img src="assets/codestar.svg" height="30" style="border: 0; background-color: transparent; position: relative" /><br /
+<small style="display: inline-flex;">Frontend Software Engineer @ BZK</small>
+  <img src="assets/codestar.svg" height="30" style="border: 0; background-color: transparent; position: relative" /><br />
   <small>@MrtnvDam<br />martin.van.dam@ordina.nl</small>
 </div>
 
@@ -72,7 +72,7 @@ const person = { name: 'Henk', age: 22 };
 const person2 = { name: 'Piet' };
 
 function multiplyAge(person) {
-    return person.age * 2;
+  return person.age * 2;
 }
 
 multiplyAge(person); // what would be the result?
@@ -84,17 +84,17 @@ multiplyAge(person2); // And here?
 ```ts
 // TypeScript
 type Person = {
-    name: string
-    age?: number
+  name: string
+  age?: number
 }
 
 const person: Person = {
-    name: 'Henk'
+  name: 'Henk'
 }
 
 function multiplyAge(person: Person) {
-    return person.age * 2 
-    // Error! 'age' is possibly undefined
+  return person.age * 2 
+  // Error! 'age' is possibly undefined
 }
 ```
 ----
@@ -239,28 +239,30 @@ Typechecking is done during compile time and is removed from the compilation res
 
 ----
 
-- String
+String
 ```ts
 const myName: string = 'Martin'
-const myLastName: string = 123 // Error! Type '123' is not assignable to type 'string'.
+const myLastName: string = 123
+// Error! Type '123' is not assignable to type 'string'.
 ```
 
-- Number
+Number
 ```ts
 const myAge: number = 29
-const daysLeftThisYear: number = '100' // Error! Type '"100"' is not assignable to type 'number'.
+const daysLeftThisYear: number = '100'
+// Error! Type '"100"' is not assignable to type 'number'.
 ```
 
 ----
 
-- String Literal
+String Literal
 ```ts
 let myType: 'A' | 'B' = 'A'
 myType = 'B' // Works!
 myType = 'Z' // Error! Type '"Z"' is not assignable to type '"A" | "B"'.
 ```
 
-- Number Literal
+Number Literal
 ```ts
 let myType: 1 | 2 = 1
 myType = 2 // Works!
@@ -272,7 +274,9 @@ myType = 9 // Error! Type '9' is not assignable to type '1 | 2'.
 ```ts
 export type TextFileTypes = 'pdf' | 'doc' | 'md'
 
-function acceptTextFile(fileName: string, fileType: TextFileTypes) {
+function acceptTextFile(
+  fileName: string,
+  fileType: TextFileTypes) {
     // Do things
 }
 
@@ -281,21 +285,21 @@ acceptTextFile('bla.jpg', 'jpg') // Error!
 
 ----
 
-- Boolean
+Boolean
 
 ```ts
 const hasChildren: boolean = true
 const amountOfChildren: boolean = 22 // Error! Type '22' is not assignable to type 'boolean'.
 ```
 
-- Null / Undefined
+Null / Undefined
   
 ```ts
 const u: undefined = undefined;
 const n: null = null;
 ```
 
-- Any
+Any
 
 Avoid where possible! Removes your typesafety!
 
@@ -307,7 +311,7 @@ const yourAge: any = myAge // Works!
 
 ----
 
-- Array
+Array
   
 ```ts
 const days: string[] = [ 'Monday', 'Tuesday', 'Wednesday' ]
@@ -317,7 +321,7 @@ const dates: number[] = [ 1, 2, '3' ] // Error! Type 'string' is not assignable 
 const dates2: Array<string | number> = [ 1, 2, '3' ] // Works!
 ```
 
-- Tuple
+Tuple
 
 ```ts
 const tuple: [ string, number ] = [ 'age', 28 ]
@@ -326,35 +330,35 @@ const otherTuple: [ string, string ] = [ 'a', 'b', 'c' ] // Error! Types of prop
 
 ----
 
-- Enum
+Enum
 
 ```ts
 enum ResponseCode {
-OK = 200,
-NOT_FOUND = 404
+  OK = 200,
+  NOT_FOUND = 404
 }
 
 function getResponse(isOk: boolean): number {
-if (isOk) {
-    return ResponseCode.OK
-}
+  if (isOk) {
+      return ResponseCode.OK
+  }
 
-return ResponseCode.NOT_FOUND
+  return ResponseCode.NOT_FOUND
 }
 ```
 
 ----
 
-- Object
+Object
 
 ```ts
 const myObject: object = { name: 'Henk' }
 const notAnObject: object = 1 // Error! Type '1' is not assignable to type 'object'.
 ```
 
-- Record
+Record
 
-Looks like an object but is more limited.
+Looks like an object but is strict.
 
 ```ts
 const myRecord: Record<string, number> = { age: 22 }
@@ -364,20 +368,20 @@ const faultyRecord: Record<boolean, string> = ... // Error! Type 'boolean' does 
 
 ----
 
-- Never
+Never
     
 Should -never- happen
 ```ts
 function isHenk(name: 'Henk' | 'Piet') {
-    switch(name) {
-        case 'Henk':
-            return true
-        case 'Piet':
-            return false
-        default:
-            const exhaustive: never = name
-            throw exhaustive
-    }
+  switch(name) {
+    case 'Henk':
+      return true
+    case 'Piet':
+      return false
+    default:
+      const exhaustive: never = name
+      throw exhaustive
+  }
 }
 ```
 
@@ -406,25 +410,25 @@ const myOtherVar = 'my other value'
 
 ### Interfaces & Type Aliases
 
- ```ts
-    interface Person {
-        name: string
-        age: number
-    }
+```ts
+interface Person {
+  name: string
+  age: number
+}
 ```
 
 Mainly used to define the expected shape of data coming from the outside.
 
 ----
 
- Optionals
+Optionals
 
-  ```ts
-  interface Person {
-    name: string
-    age?: number // this is optional
-  }
-  ```
+```ts
+interface Person {
+  name: string
+  age?: number // this is optional
+}
+```
 
 Handy when a value is sometimes not available
 
@@ -467,8 +471,8 @@ Readonly
 
 ```ts
 interface Person {
-    readonly name: string
-    age: number
+  readonly name: string
+  age: number
 }
 
 const person: Person = { name: 'Henk', age: 22 }
@@ -488,8 +492,8 @@ Almost the same as `interface` but;
 
 ```ts
 type Person = {
-    name: string
-    age: number
+  name: string
+  age: number
 }
 ```
 
@@ -526,10 +530,10 @@ In ES5
 
 ```js
 var MyClass = /** @class */ (function () {
-    function MyClass(name) {
-        this.name = name;
-    }
-    return MyClass;
+  function MyClass(name) {
+    this.name = name;
+  }
+  return MyClass;
 }());
 ```
 
@@ -558,9 +562,9 @@ class MyClass {
 ```js
 // Transpiles to
 class MyClass {
-    constructor(name) {
-        this.name = name; // We get this assignment for free!
-    }
+  constructor(name) {
+    this.name = name; // We get this assignment for free!
+  }
 }
 
 ```
@@ -774,15 +778,97 @@ Static properties or methods are available without constructing the class.
 
 ---
 
+### Exercise 3
+
+Use classes, functions and interfaces/types to refactor a JS or basic TS file into a more typesafe and readable format.
+
+---
+
+### Exercise 4
+
+The given JS file contains a bug. Refactor to TypeScript and see if you can isolate and fix the bug by increasing typesafety.
+
+---
+
 ### Functions
 
+Without types:
+
+```ts
+const minutesToSeconds = (minutes) => {
+  return minutes * 60
+}
+```
+
+----
+
+With parameter- and return type:
+
+```ts
+const minutesToSeconds = (minutes: number): number => {
+  return minutes * 60
+}
+```
+
+----
+
+ Or we can just use the Function Type:
+
+```ts
+type MinutesToSeconds = (minutes: number) => number
+
+const minutesToSeconds: MinutesToSeconds = (minutes) => {
+  return minutes * 60
+}
+```
+
+----
+
+Optional parameters:
+```ts
+const multiply = (a: number, b?: number) => {
+  return a * b // Error! Object is possibly 'undefined'.
+}
+```
+
+```ts
+const multiply = (a: number, b?: number) => {
+  if (b === undefined) {
+    return 0
+  }
+
+  return a * b // Works!
+}
+```
+
+----
+
+Default parameter:
+
+```ts
+const multiply = (a: number, b: number = 0) => {
+  return a * b // Works!
+}
+```
+
 ---
 
-Exercise 3 - Use classes, functions and interfaces/types to refactor a JS or basic TS file into a more typesafe and readable format.
+### Exercise 5 - Function types
+
+See if you can write Function types for the provided functions.
+
+```ts
+type MyFunction = (input: string) => string
+const myFunction: MyFunction = input => input
+```
 
 ---
 
-Exercise 4 - The given JS file contains a bug. Refactor to TypeScript and see if you can isolate and fix the bug by increasing typesafety.
+### Exercise 6
+
+We already have a TypeScript file. But it can be improved. See what you can do to make it more strict!
+
+Hint: You can think of string literal types and Function Types.
 
 ---
 
