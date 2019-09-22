@@ -786,6 +786,8 @@ Use classes, functions and interfaces/types to refactor a JS or basic TS file in
 
 ### Exercise 4
 
+`exercises/4_js_with_bug_to_ts.js`
+
 The given JS file contains a bug. Refactor to TypeScript and see if you can isolate and fix the bug by increasing typesafety.
 
 ---
@@ -855,6 +857,8 @@ const multiply = (a: number, b: number = 0) => {
 
 ### Exercise 5 - Function types
 
+`exercises/5_function_types.ts`
+
 See if you can write Function types for the provided functions.
 
 ```ts
@@ -866,9 +870,109 @@ const myFunction: MyFunction = input => input
 
 ### Exercise 6
 
+`exercises/6_ts_to_better_ts.ts`
+
 We already have a TypeScript file. But it can be improved. See what you can do to make it more strict!
 
 Hint: You can think of string literal types and Function Types.
+
+---
+
+### @types/...
+
+Type definition for non-TypeScript libraries
+
+https://github.com/DefinitelyTyped/DefinitelyTyped
+
+More than 6.640 type definitions for libraries/projects
+
+----
+
+### How to use type definitions
+
+```bash
+npm install react
+npm install @types/react
+```
+
+```ts
+import React from 'react' // no need to use `@types/... here`
+...
+```
+
+----
+
+### custom.d.ts
+
+Lets say we use an untyped library:
+
+```ts
+import { sayHello } from 'say-hello'
+
+sayHello('Hello!')
+
+// Error! Cannot find module 'say-hello'.
+```
+
+----
+
+We can make a declaration for this library ourself:
+
+```ts
+// say-hello.d.ts
+declare module 'say-hello' {
+  export function sayHello(input: string): void
+}
+```
+
+----
+
+### Pros
+- Flexibility
+- Immediately available
+- Only declare what you need
+
+----
+
+### Cons
+- Potentially dangerous
+- Maintenance
+
+----
+
+Use DefinitelyTyped where possible!
+
+https://github.com/DefinitelyTyped/DefinitelyTyped
+
+---
+
+### Wrap-up
+
+- What is TypeScript
+- How to use it
+- TypeScript compiler
+- Basic Types
+- Type definitions
+
+---
+
+### Resources
+
+- https://www.typescriptlang.org/docs/home.html
+- https://github.com/DefinitelyTyped/DefinitelyTyped
+
+---
+
+### Intermediate / Advanced TypeScript
+
+Werner will tell you even cooler stuff tomorrow! 🎉
+
+---
+
+### 🙌 Thanks 🙌
+
+
+Questions anyone?
 
 ---
 
@@ -877,16 +981,4 @@ Aandachtspuntjes:
 
 Opdracht ideeën:
 - **Per categorie uit de README een opdracht**
-- Een JS bestand refactoren naar TS
 - Misschien een bestaande (of neppe) JS library voorzien een type definition (zonder sourcecode te editen)
-
-** JS file bevat een bug, schrijf om naar TypeScript en fix de bug. (Compiler zou je moeten helpen als je het typesafe genoeg doet.)
-
-## Opdrachten
-- Schrijf een interface voor een given object
-- Schrijf een function type voor een given function
-- Refactor bestaande  (untyped) TS naar safe TS.
-- Javascript to typesafe TS
-- Spot and fix the bug
-- Refactor TS naar betere TS? ipv bijvoorbeeld het specifieker maken van types: `'value1' | 'value2' ` ipv `string`
-- 
