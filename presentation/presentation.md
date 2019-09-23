@@ -780,7 +780,9 @@ Static properties or methods are available without constructing the class.
 
 ### Exercise 3
 
-Use classes, functions and interfaces/types to refactor a JS or basic TS file into a more typesafe and readable format.
+`exercises/3_refactor_me.js`
+
+Use classes, functions and interfaces/types to refactor a JS file into a more typesafe and readable format.
 
 ---
 
@@ -878,6 +880,30 @@ Hint: You can think of string literal types and Function Types.
 
 ---
 
+### import / export
+
+When using or creating external tools and libraries, we `import from` and `export` our TypeScript elements. This way the compiler knows what to share and where to look for certain parts.
+
+----
+
+```ts
+// ./a.ts
+export type TypeA = 'string'
+export class A {
+  constructor(readonly type: TypeA) {}
+}
+```
+
+```ts
+// ./b.ts
+import { TypeA, A } from './a' // relative path, so ./a.ts
+import { Example } from 'external-lib' // node_modules
+
+const a = new A(Example.name)
+```
+
+---
+
 ### @types/...
 
 Type definition for non-TypeScript libraries
@@ -971,14 +997,19 @@ Werner will tell you even cooler stuff tomorrow! 🎉
 
 ### 🙌 Thanks 🙌
 
-
 Questions anyone?
 
----
+----
 
-Aandachtspuntjes:
-- Imports / Exports
-
-Opdracht ideeën:
-- **Per categorie uit de README een opdracht**
-- Misschien een bestaande (of neppe) JS library voorzien een type definition (zonder sourcecode te editen)
+<div style="float: left; width: 45%;">
+  <img src="assets/bjorn.jpg" width="100" style="border-radius:100%; display: inline-flex;">
+  <h1 style="font-size: 0.9em;">Bjorn Schijff</h1>
+  <img src="assets/codestar.svg" height="30" style="border: 0; background-color: transparent;"><br />
+   <small>@Bjeaurn<br /> bjorn.schijff@ordina.nl</small>
+</div>
+<div style="float: right; width: 45%;">
+  <img src="assets/martin.jpg" width="100" style="border-radius:100%; display: inline-flex;">
+  <h1 style="font-size: 0.9em;">Martin van Dam</h1>
+  <img src="assets/codestar.svg" height="30" style="border: 0; background-color: transparent; position: relative" /><br />
+  <small>@MrtnvDam<br />martin.van.dam@ordina.nl</small>
+</div>
