@@ -4,14 +4,7 @@
 
 ---
 
-<div style="float: left; width: 45%;">
-  <img src="assets/bjorn.jpg" width="100" style="border-radius:100%; display: inline-flex;">
-  <h1 style="font-size: 0.9em;">Bjorn Schijff</h1>
-  <small style="display: inline-flex;">Frontend Software Engineer @ Politie</small>
-  <img src="assets/codestar.svg" height="30" style="border: 0; background-color: transparent;"><br />
-   <small>@Bjeaurn<br /> bjorn.schijff@ordina.nl</small>
-</div>
-<div style="float: right; width: 45%;">
+<div>
   <img src="assets/martin.jpg" width="100" style="border-radius:100%; display: inline-flex;">
   <h1 style="font-size: 0.9em;">Martin van Dam</h1>
 <small style="display: inline-flex;">Frontend Software Engineer @ BZK</small>
