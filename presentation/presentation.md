@@ -127,16 +127,17 @@ Let's install TypeScript!
 # npm
 npm install typescript
 
-# yarn
+# or with yarn
 yarn add typescript
 ```
 
 ```sh
 mkdir typescript-101
 cd typescript-101
-tsc --init
+npx tsc --init
 ```
 
+// todo:: waarom werkt install -g niet samen met PATH in bash_profile??
 ----
 
 ### tsc --init
@@ -179,7 +180,7 @@ console.log('Hello TypeScript!');
 ```
 
 ```sh
-tsc index.ts
+npx tsc index.ts
 node index.js
 
 # or if you want with ts-node (npm install ts-node)
@@ -189,7 +190,7 @@ npx ts-node index.ts
 ```html
 touch index.html
 
-<!doctype hmtl>
+<!doctype html>
 <html>
 <head>
   <script src="index.js"></script>
@@ -338,7 +339,7 @@ enum ResponseCode {
   NOT_FOUND = 404
 }
 
-function getResponse(isOk: boolean): number {
+function getResponse(isOk: boolean): ResponseCode {
   if (isOk) {
       return ResponseCode.OK
   }

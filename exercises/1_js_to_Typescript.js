@@ -40,7 +40,7 @@ function getName(customer) {
     return customer.name + ' ' + customer.lastName;
 }
 
-function getAddress(customer) {
+function getFullAddress(customer) {
     return customer.address.street + ', ' + customer.address.city;
 }
 
@@ -56,7 +56,7 @@ function isCloseToRetirement(customer) {
 }
 
 console.log(getAge(customers[1]));
-console.log(getAddress(customers[0]));
+console.log(getFullAddress(customers[0]));
 customers.forEach(function (c) {
     console.log(getName(c), isCloseToRetirement(c));
 });

@@ -450,7 +450,7 @@ Hint: use `clearInterval` here
 
 ---
 
-### Exersice 6
+### Exercise 6
 
 When the New lap button is clicked:
 
@@ -459,7 +459,7 @@ When the New lap button is clicked:
 
 ---
 
-### Exersice 7
+### Exercise 7
 
 - Covert the seconds in state to minutes and seconds and display it on the screen
 
