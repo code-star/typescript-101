@@ -514,6 +514,10 @@ export interface File {
 
 ---
 
+<img src="assets/types-vs-interfaces.png" style="height: 90vh;" />
+
+---
+
 ### Exercise 2
 Take `exercises/2_json_to_types.ts`, create interfaces and types for the data. 
 
