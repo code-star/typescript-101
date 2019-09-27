@@ -1,3 +1,8 @@
+// Exercise 3
+// Use classes, functions and/or interfaces/types to refactor a JS file into a TS file.
+// Make it  more typesafe and readable where you can.
+//
+
 function Person(name, gender = 'unknown') {
 	this.name = name
 	this.gender = gender

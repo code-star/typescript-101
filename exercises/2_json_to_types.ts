@@ -1,4 +1,6 @@
 // Exercise 2 - Convert JSON structure to TypeScript type(s)
+// Make a type/interface that fits the datastructure underneath. Make sure you break it down into smaller types where you can.
+//
 
 const data = {
 	id: 'gfjdvlk934590afdjl41_539s0',
