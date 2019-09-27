@@ -6,7 +6,6 @@
   "scripts": {
     "start": "npm run reveal",
     "reveal": "reveal-md presentation/presentation.md -w",
-    "reveal-react": "reveal-md presentation/react.md -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
