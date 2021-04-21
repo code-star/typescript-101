@@ -861,9 +861,19 @@ const multiply = (a: number, b: number = 0) => {
 
 ---
 
-### Exercise 5 - Function types
+### Exercise 5
 
-`exercises/5_function_types.ts`
+`exercises/5_ts_to_better_ts.ts`
+
+We already have a TypeScript file. But it can be improved. See what you can do to make it more strict!
+
+Hint: You can think of string literal types and Function Types.
+
+---
+
+### Exercise 6 - Function types
+
+`exercises/6_function_types.ts`
 
 See if you can write Function types for the provided functions.
 
@@ -871,16 +881,6 @@ See if you can write Function types for the provided functions.
 type MyFunction = (input: string) => string
 const myFunction: MyFunction = input => input
 ```
-
----
-
-### Exercise 6
-
-`exercises/6_ts_to_better_ts.ts`
-
-We already have a TypeScript file. But it can be improved. See what you can do to make it more strict!
-
-Hint: You can think of string literal types and Function Types.
 
 ---
 

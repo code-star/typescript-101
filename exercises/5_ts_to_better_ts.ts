@@ -1,4 +1,4 @@
-// Exercise 6 - Stricter types
+// Exercise 5 - Stricter types
 // The given types are very broad. Can we make them better to have more typesafety?
 
 type PageSettings = {

@@ -1,4 +1,4 @@
-// Exercise 5 - Function types
+// Exercise 6 - Function types
 // Write function types for the provided functions.
 
 const multiplyByFour = (input: number): number => {
