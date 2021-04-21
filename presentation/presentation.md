@@ -129,6 +129,8 @@ npm install typescript
 
 # or with yarn
 yarn add typescript
+
+# No global install, you can do this optionally yourself!
 ```
 
 ```sh
@@ -137,10 +139,9 @@ cd typescript-101
 npx tsc --init
 ```
 
-// todo:: waarom werkt install -g niet samen met PATH in bash_profile??
 ----
 
-### tsc --init
+### npx tsc --init
 - Creates a `tsconfig.json`
 - Sets up the default configuration for your TypeScript project
 
