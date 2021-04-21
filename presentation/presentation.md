@@ -997,7 +997,7 @@ https://github.com/DefinitelyTyped/DefinitelyTyped
 
 ### Intermediate / Advanced TypeScript
 
-Werner will tell you even cooler stuff tomorrow! 🎉
+Let us know if you want to continue learning TypeScript! We also have an advanced course available.
 
 ---
 
