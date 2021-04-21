@@ -201,14 +201,12 @@ touch index.html
 
 ---
 
-## TSLint or ESLint
-Normally we would add a linter here, but with the current roadmap it's uncertain which one is the way forward.
-
+## ESLint
 You use a linter to enforce or disable certain "patterns" of coding. This enforces a team coding standard.<!--.element: class="fragment" -->
 
-For advanced sessions or private studying. 😉<!--.element: class="fragment" -->
-
 (We use it to disable semicolons, etc.)<!--.element: class="fragment" -->
+
+For advanced sessions or private studying. 😉<!--.element: class="fragment" -->
 
 ---
 
