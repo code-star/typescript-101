@@ -27,7 +27,7 @@ const modifyUserAge = (
 	}
 }
 
-// This one is a little more complex. See it you can create a type for this object.
+// This one is a little more complex. See if you can create a type for this object.
 // It will be a combination of an object type with functions types.
 // Example type:
 
