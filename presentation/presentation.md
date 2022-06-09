@@ -150,18 +150,17 @@ npx tsc --init
 ```ts
 {
   "compilerOptions": {
-    /* Basic Options */
-    "target": "es5",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019' or 'ESNEXT'. */
-    "module": "commonjs",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
-    // "lib": ["dom"],                             /* Specify library files to be included in the compilation. */
-    // "declaration": true,                   /* Generates corresponding '.d.ts' file. */
-    // "declarationMap": true,                /* Generates a sourcemap for each corresponding '.d.ts' file. */
-    // "sourceMap": true,                     /* Generates corresponding '.map' file. */
+    "target": "es2016",                       /* Specify ECMAScript target version: i.e.: 'ES5', 'ES2017', 'ESNEXT', ... */
+    "module": "commonjs",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', ... */
+    "esModuleInterop": true,                  /* Emit additional JavaScript to ease support for importing CommonJS modules. */
+    "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */
+    "strict": true,                           /* Enable all strict type-checking options. */
+    "skipLibCheck": true                      /* Skip type checking all .d.ts files. */
+    // "allowSyntheticDefaultImports": true,  /* Allow 'import x from y' without default export. */
+    // "lib": ["dom"],                        /* Specify library files to be included in the compilation. */
     // "outFile": "./",                       /* Concatenate and emit output to single file. */
     // "outDir": "./",                        /* Redirect output structure to the directory. */
-    // "rootDir": "./",                       /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
-    /* Strict Type-Checking Options */
-    "strict": true,                           /* Enable all strict type-checking options. */
+    // "rootDir": "./",                       /* Specify the root directory of input files. */
   }
 }
 
