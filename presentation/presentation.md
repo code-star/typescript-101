@@ -64,6 +64,16 @@ Anyone?
 
 ---
 
+### But keep in mind
+
+* Learning curve
+* It can make prototyping slower
+* Compiler errors could be deterrent
+* Compiler is required
+* Libraries could lack TypeScript support, `@types` needed
+
+---
+
 Let's look at the following scenario:
 
 ```js
@@ -914,7 +924,7 @@ Type definition for non-TypeScript libraries
 
 https://github.com/DefinitelyTyped/DefinitelyTyped
 
-More than 6.640 type definitions for libraries/projects
+More than 8.132 type definitions for libraries/projects
 
 ----
 
