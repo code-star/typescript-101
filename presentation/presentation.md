@@ -121,6 +121,14 @@ This is there to help you!
 
 ---
 
+For the exercises to come, please `git clone` this repo:
+
+### https://tinyurl.com/typescript-101
+
+Or we can use the TypeScript Playground
+
+---
+
 Let's install TypeScript!
 
 ```sh
@@ -141,7 +149,8 @@ npx tsc --init
 
 ----
 
-### npx tsc --init
+### Initializing TypeScript
+`npx tsc --init`
 - Creates a `tsconfig.json`
 - Sets up the default configuration for your TypeScript project
 
@@ -171,12 +180,13 @@ npx tsc --init
 ### Writing your first TypeScript
 
 ```sh
-touch index.ts 
-code .        # for VSCode users
+touch index.ts  // Mac/Linux
+copy nul "index.ts" // Windows
 ```
 
 ```ts
-console.log('Hello TypeScript!');
+console.log('Hello TypeScript!'); // Node & Browser 
+document.write('Hello TypeScript!'); // Browser only
 ```
 
 ```sh
@@ -386,6 +396,22 @@ function isHenk(name: 'Henk' | 'Piet') {
 
 The compiler will let you know when you forgot adding a `case` for an expected value.
 
+----
+
+Type Inference
+
+```
+function test(value: T | undefined) {
+  if (value === undefined) {
+    // here I know I'm not T
+  } else {
+    // here I know I'm not undefined
+  }
+}
+```
+
+The compiler will "infer" its type as you narrow it.
+
 ---
 
 ### Exercises basic types
@@ -554,7 +580,9 @@ class MyClass {
 
 ----
 
-### Auto assignment
+### TypeScript
+
+Does auto assignment in the constructor.
 
 ```ts
 class MyClass {
@@ -637,65 +665,17 @@ Useful when you have multiple implementations, but they need to adhere to a stan
 
 ### Inheritence (extends)
 
- ```ts
-class Controller {
-  isActive: boolean
-
-  constructor(isActive: boolean) {
-    this.isActive = isActive
-  }
-
-  getIsActive(): boolean {
-    return this.isActive
-  }
+```ts
+export class File {
+  protected id: string
 }
 
-class DroneController extends Controller {
-  altitude: number
-
-  constructor(isActive: boolean, altitude: number) {
-    super(isActive)
-    this.altitude = altitude
-  }
-
-  getState() {
-    return {
-      isActive: super.getIsActive(),
-      altitude: this.altitude
-    }
-  }
+export class Image extends File {
+  fileType: 'image'
 }
-
-const drone = new DroneController(true, 0)
 ```
 
 Useful to create classes with the same basis, to prevent duplicate code and enforcing business rules.
-
-----
-
-### Inheritence (Abstract)
-
-```ts
-abstract class Controller {
-  private isActive: boolean
-
-  constructor(isActive: boolean) {
-    this.isActive = isActive
-  }
-
-  protected abstract blieb(): void // must be implemented in derived classes
-}
-
-class DroneController extends Controller {
-  constructor(isActive: boolean) {
-    super(isActive)
-  }
-
-  protected blieb() {
-    MOTORS.zoom()
-  }
-}
-```
 
 ----
 
@@ -713,33 +693,15 @@ class Controller {
     this.isActive = false // Error! Cannot assign to 'isActive' because it is a read-only property.
   }
 }
-
-const controller = new Controller(true)
-controller.isActive = // Error! Cannot assign to 'isActive' because it is a read-only 
 ```
+
+Makes a variable immutable from a compiler perspective.
 
 ----
 
 ### Getters and Setters
 
 ```ts
-// Meh
-class Controller {
-  isActive: boolean
-}
-
-const controller = new Controller()
-controller.isActive = true
-
-const controllerState = controller.isActive // true
-```
-
-----
-
-### Getters and Setters
-
-```ts
-// Yeah!
 class Controller {
   private _isActive: boolean
 
@@ -748,6 +710,7 @@ class Controller {
   }
 
   set isActive(isActive: boolean) {
+    console.log('setting isActive to', isActive)
     this._isActive = isActive
   }
 }
@@ -768,12 +731,11 @@ class Controller {
   static type: string = 'drone'
 
   static blieb() {
-    // make some noise
+    console.log('makes noise!')
   }
 }
 
 const controllerType = Controller.type // 'drone'
-
 Controller.blieb() // makes noise!
 ```
 
