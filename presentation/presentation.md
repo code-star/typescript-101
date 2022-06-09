@@ -580,7 +580,9 @@ class MyClass {
 
 ----
 
-### Auto assignment
+### TypeScript
+
+Does auto assignment in the constructor.
 
 ```ts
 class MyClass {
@@ -663,65 +665,17 @@ Useful when you have multiple implementations, but they need to adhere to a stan
 
 ### Inheritence (extends)
 
- ```ts
-class Controller {
-  isActive: boolean
-
-  constructor(isActive: boolean) {
-    this.isActive = isActive
-  }
-
-  getIsActive(): boolean {
-    return this.isActive
-  }
+```ts
+export class File {
+  protected id: string
 }
 
-class DroneController extends Controller {
-  altitude: number
-
-  constructor(isActive: boolean, altitude: number) {
-    super(isActive)
-    this.altitude = altitude
-  }
-
-  getState() {
-    return {
-      isActive: super.getIsActive(),
-      altitude: this.altitude
-    }
-  }
+export class Image extends File {
+  fileType: 'image'
 }
-
-const drone = new DroneController(true, 0)
 ```
 
 Useful to create classes with the same basis, to prevent duplicate code and enforcing business rules.
-
-----
-
-### Inheritence (Abstract)
-
-```ts
-abstract class Controller {
-  private isActive: boolean
-
-  constructor(isActive: boolean) {
-    this.isActive = isActive
-  }
-
-  protected abstract blieb(): void // must be implemented in derived classes
-}
-
-class DroneController extends Controller {
-  constructor(isActive: boolean) {
-    super(isActive)
-  }
-
-  protected blieb() {
-    MOTORS.zoom()
-  }
-}
-```
 
 ----
 
@@ -739,33 +693,15 @@ class Controller {
     this.isActive = false // Error! Cannot assign to 'isActive' because it is a read-only property.
   }
 }
-
-const controller = new Controller(true)
-controller.isActive = // Error! Cannot assign to 'isActive' because it is a read-only 
 ```
+
+Makes a variable immutable from a compiler perspective.
 
 ----
 
 ### Getters and Setters
 
 ```ts
-// Meh
-class Controller {
-  isActive: boolean
-}
-
-const controller = new Controller()
-controller.isActive = true
-
-const controllerState = controller.isActive // true
-```
-
-----
-
-### Getters and Setters
-
-```ts
-// Yeah!
 class Controller {
   private _isActive: boolean
 
@@ -774,6 +710,7 @@ class Controller {
   }
 
   set isActive(isActive: boolean) {
+    console.log('setting isActive to', isActive)
     this._isActive = isActive
   }
 }
@@ -794,12 +731,11 @@ class Controller {
   static type: string = 'drone'
 
   static blieb() {
-    // make some noise
+    console.log('makes noise!')
   }
 }
 
 const controllerType = Controller.type // 'drone'
-
 Controller.blieb() // makes noise!
 ```
 
