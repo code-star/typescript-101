@@ -1,77 +1,28 @@
-const customers: Customer[] = [
-	{
-		name: 'Jan',
-		lastName: 'Koper',
-		company: 'Koophandel B.V.',
-		address: {
-			city: 'Utrecht',
-			street: 'Utrechtsestraat 2',
-			zipCode: '1234 AB'
-		},
-		role: 'Chief Buying Officer',
-		age: 46
-	},
-	{
-		name: 'Henk',
-		lastName: 'Koopman',
-		company: 'Koophandel B.V.',
-		address: {
-			city: 'Utrecht',
-			street: 'Utrechtsestraat 2',
-			zipCode: '1234 AB'
-		},
-		role: 'Chief Sales Officer'
-	},
-	{
-		name: 'Freek',
-		lastName: 'Koning',
-		company: 'Koophandel B.V.',
-		address: {
-			city: 'Utrecht',
-			street: 'Utrechtsestraat 2',
-			zipCode: '1234 AB'
-		},
-		role: 'Owner',
-		age: 68
-	}
-];
+const firstName: string = 'Henk'
+const age: number = 33
+const hasChildren: boolean = false
+const parents: string[] = ['John', 'Mary']
+const parentAges: number[] = [55, 48]
+const variousValues: Array<string | number> = ['22', 21, 98, '33', '11']
 
-interface Customer {
-	name: string;
-	lastName: string;
-	company: string;
-	address: Address;
-	role: string;
-	age?: number;
+const userInfo = {
+	name: firstName,
+	age: age,
+	hasChildren: hasChildren
 }
 
-type Address = {
-	city: string;
-	street: string;
-	zipCode: string;
-};
-
-function getName(customer: Customer): string {
-	return customer.name + ' ' + customer.lastName;
+function isAdult(age: number): boolean {
+	return age > 18
 }
 
-function getAddress(customer: Customer): string {
-	return customer.address.street + ', ' + customer.address.city;
+function makeString(input: number): string {
+	return input.toString()
 }
 
-function getAge(customer: Customer): number {
-	if (!customer.age) {
-		return -1;
-	}
-	return customer.age;
+function uppercase(input: string) {
+	return input.toUpperCase()
 }
 
-function isCloseToRetirement(customer: Customer) {
-	return getAge(customer) > 67;
-}
-
-console.log(getAge(customers[1]));
-console.log(getAddress(customers[0]));
-customers.forEach(c => {
-	console.log(getName(c), isCloseToRetirement(c));
-});
+// What if we iterate over parentAges with isAdult? What if we do the same with variousValues?
+// What if we iterate over the parents with uppercase? What if we do the same with variousValues?
+// What if we makeString the variousValues? Can we still check 'isAdult'?
