@@ -397,6 +397,22 @@ function isHenk(name: 'Henk' | 'Piet') {
 
 The compiler will let you know when you forgot adding a `case` for an expected value.
 
+----
+
+Type Inference
+
+```
+function test(value: T | undefined) {
+  if (value === undefined) {
+    // here I know I'm not T
+  } else {
+    // here I know I'm not undefined
+  }
+}
+```
+
+The compiler will "infer" its type as you narrow it.
+
 ---
 
 ### Exercises basic types
