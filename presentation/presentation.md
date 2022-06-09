@@ -121,6 +121,14 @@ This is there to help you!
 
 ---
 
+For the exercises to come, please `git clone` this repo:
+
+### https://tinyurl.com/typescript-101
+
+Or we can use the TypeScript Playground
+
+---
+
 Let's install TypeScript!
 
 ```sh
@@ -141,7 +149,8 @@ npx tsc --init
 
 ----
 
-### npx tsc --init
+### Initializing TypeScript
+`npx tsc --init`
 - Creates a `tsconfig.json`
 - Sets up the default configuration for your TypeScript project
 
@@ -172,12 +181,13 @@ npx tsc --init
 ### Writing your first TypeScript
 
 ```sh
-touch index.ts 
-code .        # for VSCode users
+touch index.ts  // Mac/Linux
+copy nul "index.ts" // Windows
 ```
 
 ```ts
-console.log('Hello TypeScript!');
+console.log('Hello TypeScript!'); // Node & Browser 
+document.write('Hello TypeScript!'); // Browser only
 ```
 
 ```sh
