@@ -18,3 +18,11 @@ function isAdult(age: number): boolean {
 function makeString(input: number): string {
 	return input.toString()
 }
+
+function uppercase(input: string) {
+	return input.toUpperCase()
+}
+
+// What if we iterate over parentAges with isAdult? What if we do the same with variousValues?
+// What if we iterate over the parents with uppercase? What if we do the same with variousValues?
+// What if we makeString the variousValues? Can we still check 'isAdult'?

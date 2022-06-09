@@ -23,3 +23,7 @@ function isAdult(age) {
 function makeString(input) {
 	return input.toString()
 }
+
+function uppercase(input) {
+	return input.toUpperCase()
+}
