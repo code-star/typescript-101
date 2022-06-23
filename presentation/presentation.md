@@ -1,3 +1,6 @@
+<!-- For syntax highlighting -->
+<link rel="stylesheet" href="assets/monokai-sublime.css">
+
 <img src="assets/ts.png" width="128" height="128"/>
 
 ### TypeScript 101 <!--.element: class="fragment" -->
