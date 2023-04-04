@@ -676,7 +676,7 @@ Useful when you have multiple implementations, but they need to adhere to a stan
 
 ----
 
-### Inheritence (extends)
+### Inheritance (extends)
 
 ```ts
 export class File {
