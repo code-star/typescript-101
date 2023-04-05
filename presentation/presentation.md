@@ -486,7 +486,7 @@ interface Person {
   age: number
 }
 
-interface ExtendedPerson extends Person {
+interface User extends Person {
   birthDate: Date
   type: 'user' | 'moderator' | 'admin'
 }
