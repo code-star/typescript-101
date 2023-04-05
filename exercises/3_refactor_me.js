@@ -3,9 +3,9 @@
 // Make it  more typesafe and readable where you can.
 //
 
-function Person(name, gender = 'unknown') {
+function User(name, type = 'unknown') {
 	this.name = name
-	this.gender = gender
+	this.type = type
 	this.age = 0
 	this.occupation = 'unknown'
 	this.setAge = function(age) {
@@ -19,9 +19,9 @@ function Person(name, gender = 'unknown') {
 }
 
 const people = []
-people.push(new Person('Freek', 'male'))
-people.push(new Person('Anna', 'female'))
-people.push(new Person('Secret spy person'))
+people.push(new User('Freek', 'user'))
+people.push(new User('Anna', 'admin'))
+people.push(new User('Secret spy person'))
 
 people[2].setOccupation('Spy')
 
