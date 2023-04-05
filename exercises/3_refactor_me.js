@@ -18,11 +18,11 @@ function User(name, type = 'unknown') {
 	}
 }
 
-const people = []
-people.push(new User('Freek', 'user'))
-people.push(new User('Anna', 'admin'))
-people.push(new User('Secret spy person'))
+const users = []
+users.push(new User('Freek', 'user'))
+users.push(new User('Anna', 'admin'))
+users.push(new User('Secret spy person'))
 
-people[2].setOccupation('Spy')
+users[2].setOccupation('Spy')
 
-console.log(people)
+console.log(users)
