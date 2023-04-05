@@ -10,14 +10,14 @@
 <div style="float: left; width: 45%;">
   <img src="assets/bjorn.jpg" width="100" style="border-radius:100%; display: inline-flex;">
   <h1 style="font-size: 0.9em;">Bjorn Schijff</h1>
-  <small style="display: inline-flex;">Frontend Engineer / Architect @ Politie</small>
+  <small style="display: inline-flex;">Frontend Engineer / Architect / Codesmith</small>
   <img src="assets/codestar.svg" height="30" style="border: 0; background-color: transparent;"><br />
    <small>@Bjeaurn<br /> bjorn.schijff@ordina.nl</small>
 </div>
 <div style="float: right; width: 45%;">
   <img src="assets/martin.jpg" width="100" style="border-radius:100%; display: inline-flex;">
   <h1 style="font-size: 0.9em;">Martin van Dam</h1>
-<small style="display: inline-flex;">Senior Frontend Engineer @ Min. VWS</small>
+<small style="display: inline-flex;">Senior Frontend Engineer @ PortXchange</small>
   <img src="assets/codestar.svg" height="30" style="border: 0; background-color: transparent; position: relative" /><br />
   <small>@MrtnvDam<br />martin.van.dam@ordina.nl</small>
 </div>
@@ -71,8 +71,8 @@ Anyone?
 
 * Learning curve
 * It can make prototyping slower
-* Compiler errors could be deterrent
-* Compiler is required
+* Compiler errors could be a deterrent
+* Compilation is required
 * Libraries could lack TypeScript support, `@types` needed
 
 ---
@@ -138,6 +138,8 @@ For the exercises to come, please `git clone` this repo:
 
 ### https://tinyurl.com/typescript-101
 
+![](./assets/qr-code.png)
+
 Or we can use the TypeScript Playground
 
 ---
@@ -198,7 +200,7 @@ copy nul "index.ts" // Windows
 ```
 
 ```ts
-console.log('Hello TypeScript!'); // Node & Browser 
+console.log('Hello TypeScript!'); // Node & Browser (Console)
 document.write('Hello TypeScript!'); // Browser only
 ```
 
@@ -369,6 +371,8 @@ function getResponse(isOk: boolean): ResponseCode {
 }
 ```
 
+Note: There's a little gotcha when it comes to compiled Typescript Enums.
+
 ----
 
 Object
@@ -444,6 +448,8 @@ const myOtherVar = 'my other value'
 // What will be the type of `myOtherVar`?
 ```
 
+Note: const will be string literal, let will just be string.
+
 ---
 
 ### Interfaces & Type Aliases
@@ -480,9 +486,9 @@ interface Person {
   age: number
 }
 
-interface ExtendedPerson extends Person {
+interface User extends Person {
   birthDate: Date
-  gender: 'male' | 'female'
+  type: 'user' | 'moderator' | 'admin'
 }
 ```
 
@@ -505,7 +511,7 @@ This example narrows the `icon` `type` in a `WordDocument` object.
 
 ----
 
-Readonly 
+Readonly
 
 ```ts
 interface Person {
@@ -676,7 +682,7 @@ Useful when you have multiple implementations, but they need to adhere to a stan
 
 ----
 
-### Inheritence (extends)
+### Inheritance (extends)
 
 ```ts
 export class File {
