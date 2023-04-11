@@ -996,6 +996,23 @@ const DEFAULT_CONFIG: Required<CSSConfig> = {} // Errors cause everything is req
 
 ---
 
+ReturnType<F>
+
+```ts
+function createUser(name: string, type: string) {
+  return {
+    id: newId(),
+    name, 
+    type,
+    createdAt: new Date()
+  }
+}
+
+type CreatedUser = ReturnType<typeof createUser>
+```
+
+---
+
 ### import / export
 
 When using or creating external tools and libraries, we `import from` and `export` our TypeScript elements. This way the compiler knows what to share and where to look for certain parts.
