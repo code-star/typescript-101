@@ -887,6 +887,7 @@ Omit<T, K>
 Pick<T, K>
 Partial<T>
 Required<T>
+ReturnType<F>
 ```
 ---
 
