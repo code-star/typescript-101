@@ -525,6 +525,20 @@ person.name = 'Piet' // Error! Cannot assign to 'name' because it is a read-only
 
 Doesn't actually enforce immutability, but makes sure that on compile time; we're not reassigning any readonly values.
 
+----
+
+Readonly<T>
+
+```ts
+interface Person {
+  name: string
+  age: number
+}
+
+const person: Readonly<Person> = { name: 'Readonly', age: 33 }
+person.name = 'Piet' // Error! Cannot assign to 'name' because it is a read-only property.
+```
+
 ---
 
 Type aliases
@@ -862,6 +876,142 @@ type MyFunction = (input: string) => string
 const myFunction: MyFunction = input => input
 ```
 
+--- 
+
+## Utility types
+### To mix &amp; match
+
+```ts
+Record<K, T>
+Omit<T, K>
+Pick<T, K>
+Partial<T>
+Required<T>
+ReturnType<F>
+```
+---
+
+Record<K, T>
+
+```ts
+const record: Record<string, User> = {
+  'userid1': { id: 'userid1', name: 'Test' },
+  'userid2': { id: 'userid2', name: 'Another Test' },
+}
+
+// The K in Record<K, T> only accepts types of string | number and derivatives of (Like string Enums etc.)
+```
+
+----
+
+Record<K, T>
+
+```ts
+enum Roles {
+  Admin = 'Admin',
+  Moderator = 'Moderator',
+  User = 'User'
+}
+const images: Record<Roles, { url: string, label: string }> = {
+  Admin: { label: 'admin', url: './admin.png' },
+  User: { label: 'user', url: './user.png' }
+} // Property '[Roles.Moderator]' is missing in type '{ Admin: { label: string; url: string; }; User: { label: string; url: string; }; }' but required in type 'Record<Roles, { url: string; label: string; }>'.(2741)
+```
+
+---
+
+Omit<T, K>
+
+```ts
+interface User {
+  id: string
+  name: string
+  password: string
+  email: string
+}
+
+type ShareableUser = Omit<User, 'id' | 'password'> // { name: string, email: string }
+```
+
+----
+
+Pick<T, K>
+
+```ts
+interface User {
+  id: string
+  name: string
+  password: string
+  email: string
+}
+
+type CreateUser = Pick<User, 'name' | 'password' | 'email'> // { name: string, password: string, email: string }
+```
+
+----
+
+Combined
+
+```ts
+interface User {
+  id: string
+  name: string
+  password: string
+  email: string
+}
+type UserPrivateData = Pick<User, 'password'>
+type UserNewData = Pick<User, 'name' | 'password' | 'email'>
+type SafeUser = Omit<User, keyof UserPrivateData>
+```
+
+---
+
+Partial<T>
+
+```ts
+interface UserProfile {
+  avatar: string
+  bio: string
+  likes: string[]
+}
+
+function updateProfile(user: User, profile: Partial<UserProfile>) {
+  // Update the profile with the chnages in the `profile`.
+}
+```
+
+----
+
+Required<T>
+
+```ts
+interface CSSConfig {
+  color?: string
+  backgroundColor?: string
+  fontSize?: number
+  fontFamily?: string
+}
+
+const DEFAULT_CONFIG: Required<CSSConfig> = {} // Errors cause everything is required!
+```
+
+---
+
+ReturnType<F>
+
+```ts
+function createUser(name: string, type: string) {
+  return {
+    id: newId(),
+    name, 
+    type,
+    createdAt: new Date()
+  }
+}
+
+type CreatedUser = ReturnType<typeof createUser>
+```
+
 ---
 
 ### import / export
@@ -963,6 +1113,7 @@ https://github.com/DefinitelyTyped/DefinitelyTyped
 - TypeScript compiler
 - Basic Types
 - Type definitions
+- Utility Types
 
 ---
 
