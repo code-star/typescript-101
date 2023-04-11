@@ -323,6 +323,8 @@ const u: undefined = undefined;
 const n: null = null;
 ```
 
+----
+
 Any
 
 Avoid where possible! Removes your typesafety!
@@ -876,7 +878,7 @@ type MyFunction = (input: string) => string
 const myFunction: MyFunction = input => input
 ```
 
---- 
+---
 
 ## Utility types
 ### To mix &amp; match
