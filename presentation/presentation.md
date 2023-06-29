@@ -8,18 +8,16 @@
 ---
 
 <div style="float: left; width: 45%;">
-  <img src="assets/bjorn.jpg" width="100" style="border-radius:100%; display: inline-flex;">
-  <h1 style="font-size: 0.9em;">Bjorn Schijff</h1>
-  <small style="display: inline-flex;">Frontend Engineer / Architect / Codesmith</small>
-  <img src="assets/codestar.svg" height="30" style="border: 0; background-color: transparent;"><br />
-   <small>@Bjeaurn<br /> bjorn.schijff@ordina.nl</small>
+  <img src="assets/amber.jpg" width="100" style="border-radius:100%; display: inline-flex;">
+  <h1 style="font-size: 0.9em;">Amber Taal</h1>
+  <small style="display: inline-flex;">Frontend Engineer @ Min. VWS</small>
+   <small>amber.taal@ordina.nl</small>
 </div>
 <div style="float: right; width: 45%;">
   <img src="assets/martin.jpg" width="100" style="border-radius:100%; display: inline-flex;">
   <h1 style="font-size: 0.9em;">Martin van Dam</h1>
-<small style="display: inline-flex;">Senior Frontend Engineer @ PortXchange</small>
-  <img src="assets/codestar.svg" height="30" style="border: 0; background-color: transparent; position: relative" /><br />
-  <small>@MrtnvDam<br />martin.van.dam@ordina.nl</small>
+<small style="display: inline-flex;">Frontend Engineer @ Port of Rotterdam</small>
+  <small>martin.van.dam@ordina.nl</small>
 </div>
 
 ---
@@ -71,7 +69,7 @@ Anyone?
 
 * Learning curve
 * It can make prototyping slower
-* Compiler errors could be a deterrent
+* Compiler errors could be discouraging
 * Compilation is required
 * Libraries could lack TypeScript support, `@types` needed
 
