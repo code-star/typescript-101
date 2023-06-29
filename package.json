@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/code-star/typescript-101#readme",
   "dependencies": {
-    "reveal-md": "^5.0.0"
+    "reveal-md": "^5.5.0"
   }
 }
