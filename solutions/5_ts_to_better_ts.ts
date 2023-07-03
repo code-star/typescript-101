@@ -1,38 +1,53 @@
 // Exercise 5 - Stricter types
 // The given types are very broad. Can we make them better to have more typesafety?
 
+const CATEGORY_NEWS = "news";
+const CATEGORY_GALLERY = "gallery";
+const CATEGORY_CONTACT = "contact";
+
+type Category =
+  | typeof CATEGORY_NEWS
+  | typeof CATEGORY_GALLERY
+  | typeof CATEGORY_CONTACT;
+
+type CategoryData = {
+  id: Category;
+  title: string;
+  url: string;
+};
+
 type PageSettings = {
-  activeCategory: string;
-  categoriesToShow: string[];
-  pageWidth: number;
+  activeCategory: Category;
+  categoriesToShow: Category[];
+  pageWidth: 768 | 1024;
 };
 
 let PAGE_SETTINGS: PageSettings = {
-  activeCategory: "news",
-  categoriesToShow: ["news", "contact"],
+  activeCategory: CATEGORY_NEWS,
+  categoriesToShow: [CATEGORY_NEWS, CATEGORY_CONTACT],
   pageWidth: 1024,
 };
 
-// we only expect three types of categories here:
-// news, gallery, contact
-const getTitleForCategory = (category: string): string => {
-  if (category === "news") {
+const getTitleForCategory = (category: Category): string => {
+  if (category === CATEGORY_NEWS) {
     return "News";
   }
 
-  if (category === "gallery") {
+  if (category === CATEGORY_GALLERY) {
     return "Gallery";
   }
 
-  if (category === "contact") {
+  if (category === CATEGORY_CONTACT) {
     return "Contact";
   }
 
-  // this code should not be executed
-  return "Other";
+  const exhaustive: never = category;
+  throw category;
 };
 
-const getDisplayDataForCategories = (categories: string[]) => {
+const getDisplayDataForCategories = (
+  categories: Category[]
+): CategoryData[] => {
   return categories.map((category) => ({
     id: category,
     title: getTitleForCategory(category),
@@ -40,7 +55,7 @@ const getDisplayDataForCategories = (categories: string[]) => {
   }));
 };
 
-const renderCategories = (categories: string[]) => {
+const renderCategories = (categories: Category[]) => {
   const displayData = getDisplayDataForCategories(categories);
 
   const categoryNavigation = document.createElement("ul");
