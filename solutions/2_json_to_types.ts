@@ -17,7 +17,7 @@ export interface LocationData {
 	creation: Creation
 }
 
-const data: LocationData = {
+const data = {
 	id: 'gfjdvlk934590afdjl41_539s0',
 	location: {
 		latitude: 52.056881,
@@ -30,4 +30,4 @@ const data: LocationData = {
 		createdAt: 1568023200,
 		lastEdited: 1568629455
 	}
-}
+} satisfies LocationData
