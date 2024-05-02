@@ -1016,6 +1016,13 @@ type CreatedUser = ReturnType<typeof createUser>
 
 ---
 
+### Exercises Utilty Types
+`exercises/7_utility_types.ts`
+
+Rewrite the types underneath, using Utility Types, to make them more flexible.
+
+---
+
 ### import / export
 
 When using or creating external tools and libraries, we `import from` and `export` our TypeScript elements. This way the compiler knows what to share and where to look for certain parts.
