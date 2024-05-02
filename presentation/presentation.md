@@ -8,15 +8,15 @@
 ---
 
 <div style="float: left; width: 45%;">
-  <img src="assets/amber.jpg" width="100" style="border-radius:100%; display: inline-flex;">
-  <h1 style="font-size: 0.9em;">Amber Taal</h1>
-  <small style="display: inline-flex;">Frontend Engineer @ Min. VWS</small>
-   <small>amber.taal@ordina.nl</small>
+  <img src="assets/bjorn.jpg" width="100" style="border-radius:100%; display: inline-flex;">
+  <h1 style="font-size: 0.9em;">Bjorn Schijff</h1>
+  <small style="display: inline-flex;">Sr. Frontend Engineer / Architect <br />@ ProRail</small>
+   <small>bjorn.schijff@ordina.nl</small>
 </div>
 <div style="float: right; width: 45%;">
   <img src="assets/martin.jpg" width="100" style="border-radius:100%; display: inline-flex;">
   <h1 style="font-size: 0.9em;">Martin van Dam</h1>
-<small style="display: inline-flex;">Frontend Engineer @ Port of Rotterdam</small>
+<small style="display: inline-flex;">Sr. Frontend Engineer / Architect<br />@ Port of Rotterdam</small>
   <small>martin.van.dam@ordina.nl</small>
 </div>
 
