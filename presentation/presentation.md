@@ -366,9 +366,11 @@ function getResponse(isOk: boolean): ResponseCode {
   if (isOk) {
       return ResponseCode.OK
   }
-
   return ResponseCode.NOT_FOUND
 }
+
+// Note: Enums sort off break a "rule" in TypeScript where they are no longer structural when it comes to strings.
+// Which means that fn(r: ResponseCode) will take fn(ResponseCode.OK) and fn(200), but when it comes to strings it doesn't work like that.
 ```
 
 Note: There's a little gotcha when it comes to compiled Typescript Enums.
