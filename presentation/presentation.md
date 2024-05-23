@@ -16,7 +16,7 @@
 <div style="float: right; width: 45%;">
   <img src="assets/martin.jpg" width="100" style="border-radius:100%; display: inline-flex;">
   <h1 style="font-size: 0.9em;">Martin van Dam</h1>
-<small style="display: inline-flex;">Sr. Frontend Engineer / Architect<br />@ Port of Rotterdam</small>
+<small style="display: inline-flex;">Sr. Frontend Engineer / Architect<br />@ Politie</small>
   <small>martin.van.dam@ordina.nl</small>
 </div>
 
